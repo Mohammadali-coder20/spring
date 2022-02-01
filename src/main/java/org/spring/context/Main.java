@@ -10,7 +10,7 @@ public class Main {
     }
     public void f(){
         int i = 1;
-        logger.info(String.format("this is object that have been called in f method with value %d",i));
+        logger.info(String.format("this is object i that have been called in method 'f' with value %d",i));
     }
 
 }

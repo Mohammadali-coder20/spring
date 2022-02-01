@@ -4,8 +4,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.spring.context.ContextConfig;
 import org.spring.context.Student;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import static org.junit.Assert.*;
@@ -23,7 +25,8 @@ public class AppTest
 
     @Before
     public void springContextInit(){
-        context = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        context = new AnnotationConfigApplicationContext(ContextConfig.class);
     }
 
     @Test
