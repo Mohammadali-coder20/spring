@@ -9,6 +9,10 @@
 
     <context:component-scan base-package="org.spring.context"/>
 
+    <bean name="logger" class="org.apache.log4j.Logger ">
+        <constructor-arg name="name" value="logger"/>
+    </bean>
+
 <!--    <bean name="student" class="org.spring.context.Student" scope="singleton" init-method="init">-->
 <!--        <property name="name" value="ali"/>-->
 <!--        <property name="book"  ref="book"/>-->

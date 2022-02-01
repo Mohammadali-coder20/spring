@@ -2,6 +2,7 @@ package org.spring.context;
 
 
 import lombok.*;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +24,9 @@ public class Student {
     @Value("${family}")
     private String family;
     private int age;
+
+    @Autowired
+    Logger logger;
 
     @Autowired
     @Qualifier("sportBook")
