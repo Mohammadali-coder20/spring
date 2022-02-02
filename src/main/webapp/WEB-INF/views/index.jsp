@@ -11,6 +11,7 @@
     <title>Home page</title>
 </head>
 <body>
-    <a href="/product/add">Add product</a>
+    <a href="/product/add">Add product</a><br/>
+    <a href="/product/get-all">Show List</a><br/>
 </body>
 </html>
