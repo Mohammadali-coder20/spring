@@ -12,10 +12,11 @@
     <title>product list</title>
 </head>
 <body>
-    <table border="1px" style="text-align: center">
+    <table  style="text-align: center; border:solid 1px black">
         <tr>
             <th>Name</th>
             <th>Price</th>
+            <th>Detail</th>
             <th>Delete</th>
             <th>Edit</th>
         </tr>
@@ -23,8 +24,10 @@
             <tr>
                 <td>${productDTO.name}</td>
                 <td>${productDTO.price}</td>
-                <td>X</td>
-                <td>E</td>
+<%--                <td><a href="/product/detail?id=${productDTO.id}"><img src="/resources/img/detail.jpg" width="15%" height="15%"/></a></td>--%>
+                <td><a href="/product/detail/${productDTO.id}"><img src="/resources/img/detail.jpg" width="15%" height="15%"/></a></td>
+                <td><a href="/product/delete"><img src="/resources/img/delete.png" width="15%" height="15%"/></a></td>
+                <td><a href="/product/edit"><img src="/resources/img/edit.png" width="15%" height="15%"/></a></td>
             </tr>
         </c:forEach>
     </table>
