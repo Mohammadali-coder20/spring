@@ -1,16 +1,44 @@
 package org.MohammadAli.models;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
+@Component
 public class ProductDTO {
     private int id;
+    @Size(min = 3 , message ="")
     private String name;
+    @Min(value = 1000 , message = "")
     private int price;
+    private String Type;
+    private Map<String,String> validTypes;
+
+
+    public ProductDTO(){
+        validTypes = new HashMap<>();
+        validTypes.put("1","Home");
+        validTypes.put("2","Work");
+        validTypes.put("3","School");
+        validTypes.put("4","Electronics");
+    }
+
+    public ProductDTO(int id, String name, int price, String type) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        Type = type;
+    }
 }

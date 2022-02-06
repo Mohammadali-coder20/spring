@@ -3,11 +3,13 @@ package org.MohammadAli.controllers;
 
 import org.MohammadAli.models.ProductDTO;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +19,25 @@ import java.util.List;
 public class ProductController {
 
     List<ProductDTO> list = new ArrayList<ProductDTO>(){{
-        add(new ProductDTO(41,"glass",1000));
-        add(new ProductDTO(29,"brill",2000));
+        add(new ProductDTO(41,"glass",1000,"Home"));
+        add(new ProductDTO(29,"brill",2000,"Work"));
     }};
 
-    final static Logger logger= Logger.getLogger(ProductController.class);
+    @Autowired
+    Logger logger;
+
 
     @GetMapping(value = "/add")
-    public String add(){
+    public String add(@ModelAttribute("dto") ProductDTO productDTO){
         return "product-add";
     }
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String save(ProductDTO productDTO){
+    public String save(@ModelAttribute("dto") @Valid ProductDTO productDTO , BindingResult result){
+
+        if (result.hasErrors()){
+            return "product-add";
+        }
 
         SecureRandom random = new SecureRandom();
         productDTO.setId(random.nextInt());
@@ -65,11 +73,9 @@ public class ProductController {
     }
 
     @GetMapping("/detail/{id}")
+//    @ResponseBody ---> return value dont will be given  to view resolver . the return value will be given to browser
     public String detailWithPathParameter(@PathVariable("id") int id){
         logger.info(id);
         return "product-detail";
     }
-
-
-
 }
