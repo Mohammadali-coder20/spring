@@ -4,15 +4,19 @@ package org.MohammadAli.controllers;
 import org.MohammadAli.models.ProductDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/product")
@@ -26,10 +30,20 @@ public class ProductController {
     @Autowired
     Logger logger;
 
+    @Autowired
+    MessageSource messageSource;
+
 
     @GetMapping(value = "/add")
-    public String add(@ModelAttribute("dto") ProductDTO productDTO){
+    public String add(@ModelAttribute("dto") ProductDTO productDTO, HttpServletRequest request , Locale locale){
+//        Locale locale = request.getLocale();
+//        locale.getISO3Language();
+
+//        messageSource.getMessage("error.name", new Object[]{} ,new Locale(locale.getCountry()));
+
+
         return "product-add";
+
     }
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)

@@ -19,9 +19,9 @@ import java.util.Map;
 @Component
 public class ProductDTO {
     private int id;
-    @Size(min = 3 , message ="")
+    @Size(min = 3 , message ="{error.name}")
     private String name;
-    @Min(value = 1000 , message = "")
+    @Min(value = 1000 , message = "{error.price}")
     private int price;
     private String Type;
     private Map<String,String> validTypes;

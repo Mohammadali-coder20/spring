@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title><mvc:message code=""/></title>
+    <title><mvc:message code="index.home.page" text="Home Alt"/></title>
 
 </head>
 <body>

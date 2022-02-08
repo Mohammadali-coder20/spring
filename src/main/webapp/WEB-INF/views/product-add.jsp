@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="mvc" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Asus
@@ -18,6 +19,7 @@
 <%--    <input type="submit" value="add product"/>--%>
 <%--</form>--%>
 
+    <h2><mvc:message code="product.add" text="add product section"/></h2>
     <form:form action="/product/save" method="post" modelAttribute="dto">
         <form:errors path="name" cssStyle="color: red"/><br/>
         Name:<form:input path="name"/><br/><br/>
