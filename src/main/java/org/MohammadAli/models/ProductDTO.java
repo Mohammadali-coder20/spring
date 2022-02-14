@@ -7,9 +7,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+
+import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -24,6 +27,8 @@ public class ProductDTO {
     @Min(value = 1000 , message = "{error.price}")
     private int price;
     private String Type;
+    private String color;
+    private List<Integer> sizes;
     private Map<String,String> validTypes;
 
 

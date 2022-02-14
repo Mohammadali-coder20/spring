@@ -50,7 +50,7 @@ public class ProductController {
     public String save(@ModelAttribute("dto") @Valid ProductDTO productDTO , BindingResult result){
 
         if (result.hasErrors()){
-            return "product-add";
+            return "/product-add";
         }
 
         SecureRandom random = new SecureRandom();
