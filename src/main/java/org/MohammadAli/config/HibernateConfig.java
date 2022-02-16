@@ -29,7 +29,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource){
         LocalSessionFactoryBean sessionFactoryBean =  new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
-        sessionFactoryBean.setPackagesToScan(new String[]{"org.MohammadAli.entities"});
+        sessionFactoryBean.setPackagesToScan(new String[]{"org.MohammadAli.data.entities"});
         sessionFactoryBean.setHibernateProperties(hibernateProperties());
         return sessionFactoryBean;
     }

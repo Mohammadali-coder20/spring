@@ -1,10 +1,7 @@
 package org.MohammadAli.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 
@@ -45,5 +42,16 @@ public class ProductDTO {
         this.name = name;
         this.price = price;
         Type = type;
+    }
+
+    public static class CREATE extends ProductDTO{
+
+    }
+
+
+//    @AllArgsConstructor
+    @Data
+    public static class DELETE{
+        private int id;
     }
 }

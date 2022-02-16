@@ -15,5 +15,6 @@
 
     <a href="/product/add">Add product</a><br/>
     <a href="/product/get-all">Show List</a><br/>
+    <a href="/product/delete?id=1">Delete product</a><br/>
 </body>
 </html>

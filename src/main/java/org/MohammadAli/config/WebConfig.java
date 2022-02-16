@@ -1,6 +1,7 @@
 package org.MohammadAli.config;
 
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.InjectionPoint;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ import org.springframework.web.servlet.view.JstlView;
 import javax.servlet.jsp.tagext.ValidationMessage;
 
 @Configuration
-@ComponentScan("org.MohammadAli.controllers")
+@ComponentScan(basePackages = {"org.MohammadAli.controllers","org.MohammadAli.services","org.MohammadAli.data"})
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
@@ -79,7 +80,10 @@ public class WebConfig implements WebMvcConfigurer {
         return new CookieLocaleResolver();
     }
 
-
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
+    }
 
 
 
