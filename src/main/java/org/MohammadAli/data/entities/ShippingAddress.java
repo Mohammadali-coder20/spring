@@ -15,15 +15,27 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ShippingAddress extends Audit implements Serializable {
 
-    @Column
+
     private static final Long serialVersionUID = 104L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long shippingAddressID;
+    private Long shippingAddressId;
+
+    @NotEmpty
+    private String streetName;
+
+    @NotEmpty
+    private String apartmentNumber;
 
     @NotEmpty
     private String city;
+
+    @NotEmpty
+    private String state;
+
+    @NotEmpty
+    private String country;
 
     @NotEmpty
     private String zipCode;

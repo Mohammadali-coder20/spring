@@ -37,20 +37,13 @@ public class ProductDTO {
         validTypes.put("4","Electronics");
     }
 
-    public ProductDTO(int id, String name, int price, String type) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        Type = type;
-    }
 
     public static class CREATE extends ProductDTO{
 
     }
 
-
-//    @AllArgsConstructor
     @Data
+    @AllArgsConstructor
     public static class DELETE{
         private int id;
     }

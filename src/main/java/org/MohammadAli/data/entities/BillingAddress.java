@@ -14,7 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class BillingAddress  extends Audit implements Serializable {
 
-    @Column
+
     private static final Long serialVersionUID = 103L;
 
     @Id
@@ -23,8 +23,33 @@ public class BillingAddress  extends Audit implements Serializable {
 
 
     @NotEmpty
+    private String streetName;
+
+    @NotEmpty
+    private String apartmentNumber;
+
+    @NotEmpty
     private String city;
 
     @NotEmpty
     private String zipCode;
+
+    @NotEmpty
+    private String state;
+
+    @NotEmpty
+    private String country;
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

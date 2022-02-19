@@ -1,36 +1,36 @@
-package org.MohammadAli.data.entities;
+package org.MohammadAli.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.MohammadAli.data.entities.BillingAddress;
+import org.MohammadAli.data.entities.Cart;
+import org.MohammadAli.data.entities.ShippingAddress;
 import org.MohammadAli.validators.Phone;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
-@Entity
+
 @Data
+@Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer extends Audit implements Serializable {
-
-    @Column
-    private static final Long serialVersionUID = 101L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerID;
+@ToString
+public class CustomerDTO {
 
     @NotEmpty
-    @Size(min = 3 , max = 10 , message = "{error.name}")
+    @Size(min = 4 , max = 10 )
     private String customerName;
 
     @NotEmpty
-    @Email
+    @Email()
     private String customerEmailAddress;
 
     @NotEmpty
@@ -46,17 +46,19 @@ public class Customer extends Audit implements Serializable {
 
     private boolean enabled;
 
-    @OneToOne(mappedBy = "customer")
-    private Cart cart;
-
     @Valid
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "shippingAddressId")
     private ShippingAddress shippingAddress;
 
     @Valid
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "billingAddressId")
     private BillingAddress billingAddress;
+
+    public static class CREATE extends CustomerDTO{
+
+    }
+
+
+    public static class REGISTER extends CustomerDTO{
+
+    }
 
 }

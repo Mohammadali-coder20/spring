@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class CartItem extends Audit implements Serializable {
 
-    @Column
+
     private static final Long serialVersionUID = 102L;
 
     @Id

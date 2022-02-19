@@ -6,30 +6,27 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Cart extends Audit implements Serializable {
+@NoArgsConstructor
+public class CustomerContact extends Audit implements Serializable {
 
-    @Column
-    private static final Long serialVersionUID = 101L;
+
+    private static final Long serialVersionUID = 108L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartId;
+    private Long contactID;
+
+
+    @Lob
+    private String contactInfo;
 
     @OneToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
-
-    @OneToMany(mappedBy = "cart")
-    private List<CartItem> cartItems;
-
-    private Double grandTotal;
 
 
 }
