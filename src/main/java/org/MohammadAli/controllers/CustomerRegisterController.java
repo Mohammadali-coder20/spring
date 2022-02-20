@@ -30,9 +30,9 @@ public class CustomerRegisterController {
     @PostMapping("/save")
     public String save(@Valid @ModelAttribute("customer") CustomerDTO.CREATE createDTO , BindingResult result){
         if (result.hasErrors()) {
-            return "/register-customer";
+            return "register-customer";
         }
         customerService.addCustomer(createDTO);
-        return "redirect:/home";
+        return "registerCustomerSuccess";
     }
 }

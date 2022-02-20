@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +24,10 @@ public class ProductServiceImpl implements ProductService{
     ModelMapper modelMapper;
 
     @Override
-    public void save(ProductDTO dto) {
-
-        Product product = modelMapper.map(dto,Product.class);
+    public void save(ProductDTO dto) throws IOException {
+        Product product = new Product();
+        product = modelMapper.map(dto,Product.class);
+        product.setImg(dto.getProductImg().getBytes());
         productDAO.save(product);
 
 

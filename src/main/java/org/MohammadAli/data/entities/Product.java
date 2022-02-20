@@ -16,9 +16,10 @@ import java.util.Map;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Product extends Audit implements Serializable {
 
-    @Column
+
     private static final Long serialVersionUID = 100L;
 
     @Id
@@ -34,6 +35,9 @@ public class Product extends Audit implements Serializable {
     @NotEmpty
     private String productModel;
 
+    @NotEmpty
+    private String productDescription;
+
     @NotNull
     @Range(min = 0)
     private Double productPrice;
@@ -42,19 +46,20 @@ public class Product extends Audit implements Serializable {
     @Range(min = 0)
     private Double unitInStock;
 
-    @Transient
-    private MultipartFile productImg;
+    @NotNull
+    @Range(min = 0)
+    private Double discount;
+
+    @NotEmpty
+    private String productStatus;
+
+    @NotEmpty
+    private String productCategory;
+
+    @Lob
+    private byte[] img;
 
     @OneToMany(mappedBy = "product")
     private List<CartItem> cartItems;
 
-    @Transient
-    private Map<String,String> categoryList;
-
-    public Product(){
-        categoryList = new HashMap<>();
-        categoryList.put("Laptop","Laptop");
-        categoryList.put("Mobile","Mobile");
-        categoryList.put("TV","TV");
-    }
 }

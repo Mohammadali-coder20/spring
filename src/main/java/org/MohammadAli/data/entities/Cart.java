@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Cart extends Audit implements Serializable {
 
-    @Column
+
     private static final Long serialVersionUID = 101L;
 
     @Id

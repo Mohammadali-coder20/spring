@@ -25,6 +25,7 @@ public class ProductDAOImpl implements ProductDAO{
     public void save(Product product) {
         Session session = getSession();
         session.save(product);
+        session.close();
     }
 
     @Override

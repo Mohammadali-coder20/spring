@@ -2,14 +2,17 @@ package org.MohammadAli.models;
 
 
 import lombok.*;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 
-import javax.persistence.Entity;
-import javax.validation.constraints.Min;
+import javax.persistence.Lob;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -18,23 +21,52 @@ import java.util.Map;
 @AllArgsConstructor
 @Component
 public class ProductDTO {
-    private int id;
-    @Size(min = 3 , message ="{error.name}")
-    private String name;
-    @Min(value = 1000 , message = "{error.price}")
-    private int price;
-    private String Type;
-    private String color;
-    private List<Integer> sizes;
-    private Map<String,String> validTypes;
 
+    @NotEmpty
+    @Size(min = 3 , max = 10)
+    private String productName;
+
+    @NotEmpty
+    @Size(min = 3 , max = 10)
+    private String productBrand;
+
+    @NotEmpty
+    @Size(min = 3 , max = 10)
+    private String productModel;
+
+    @NotEmpty
+    private String productDescription;
+
+    @NotNull
+    @Range(min = 0)
+    private Double productPrice;
+
+    @NotNull
+    @Range(min = 0)
+    private Double unitInStock;
+
+    @NotNull
+    @Range(min = 0)
+    private Double discount;
+
+    @NotEmpty
+    @Size(min = 3 , max = 10)
+    private String productStatus;
+
+    @NotEmpty
+    private String productCategory;
+
+
+    private MultipartFile productImg;
+
+
+    private Map<String,String> categoryList;
 
     public ProductDTO(){
-        validTypes = new HashMap<>();
-        validTypes.put("1","Home");
-        validTypes.put("2","Work");
-        validTypes.put("3","School");
-        validTypes.put("4","Electronics");
+        categoryList = new HashMap<>();
+        categoryList.put("Laptop","Laptop");
+        categoryList.put("Mobile","Mobile");
+        categoryList.put("TV","TV");
     }
 
 
