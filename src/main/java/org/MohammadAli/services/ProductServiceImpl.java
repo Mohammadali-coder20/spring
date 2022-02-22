@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,27 +25,30 @@ public class ProductServiceImpl implements ProductService{
     ModelMapper modelMapper;
 
     @Override
-    public void save(ProductDTO dto) throws IOException {
-        Product product = new Product();
-        product = modelMapper.map(dto,Product.class);
+    public void save(ProductDTO.CREATE dto) throws IOException {
+        Product product = modelMapper.map(dto,Product.class);
         product.setImg(dto.getProductImg().getBytes());
         productDAO.save(product);
-
-
     }
 
     @Override
-    public List<ProductDTO> findAll() {
+    public List<ProductDTO.RETRIEVE> findAll() {
         List<Product> productList = productDAO.findALl();
-        List<ProductDTO> productDTOList = productList
+        List<ProductDTO.RETRIEVE> productDTOList = productList
                                                      .stream()
-                                                     .map(Product -> modelMapper.map(Product,ProductDTO.class))
+                                                     .map(Product -> modelMapper.map(Product,ProductDTO.RETRIEVE.class))
                                                      .collect(Collectors.toList());
+
         return productDTOList;
     }
 
     @Override
     public void delete(ProductDTO.DELETE deleteDTO) {
-        productDAO.delete(deleteDTO.getId());
+        productDAO.delete(deleteDTO.getProductID());
+    }
+
+    @Override
+    public byte[] retrieveProductImgByID(Long Id) {
+        return productDAO.retrieveProductImgByID(Id);
     }
 }

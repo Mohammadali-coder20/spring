@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.function.IntFunction;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO{
@@ -43,6 +44,24 @@ public class ProductDAOImpl implements ProductDAO{
         Product p = entityManager.find(Product.class,id);
         entityManager.remove(p);
         entityManager.flush();
+    }
+
+    @Override
+//    @Transactional
+    public byte[] retrieveProductImgByID(Long id) {
+//        Product product = entityManager.find(Product.class,id);
+//        Object[] img = result.stream().toArray(new IntFunc() {
+//            @Overridetion
+//            public Object apply(int value) {
+//                return new byte[value];
+//            }
+//        });
+        Session session = getSession();
+        Query result = session.createQuery("select img from Product");
+        byte[] img  = (byte[]) result.list().get(0);
+        session.close();
+        return img;
+
     }
 
     public Session getSession(){

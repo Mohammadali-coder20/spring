@@ -5,23 +5,20 @@ import org.MohammadAli.models.ProductDTO;
 import org.MohammadAli.services.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/product")
 @AllArgsConstructor
 public class AdminProductController {
 
 
     ProductService productService;
 
-    @GetMapping("/product/add-product")
+    @GetMapping("/add-product")
     public String addProduct(@ModelAttribute("product") ProductDTO.CREATE createDTO){
 
         createDTO.setProductStatus("Brand New");
@@ -29,7 +26,7 @@ public class AdminProductController {
         return "add-product";
     }
 
-    @PostMapping("/product/save-product")
+    @PostMapping("/save-product")
     public String saveProduct(@Valid @ModelAttribute("product") ProductDTO.CREATE createDTO , BindingResult result) throws IOException {
 
         if (result.hasErrors())
@@ -39,5 +36,11 @@ public class AdminProductController {
         return "redirect:/admin/productManagement/1";
     }
 
+    @ResponseBody
+    @GetMapping(value = "/get-image/{imgID}" , produces = "image/jpeg")
+    public byte[] getImgByID(@PathVariable("imgID") Long imgID){
+
+        return productService.retrieveProductImgByID(imgID);
+    }
 
 }

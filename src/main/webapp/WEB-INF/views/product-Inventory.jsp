@@ -60,15 +60,15 @@
                <tr>
                       
                      
-		              <td><img  style="width:50%"  alt="image" src="/admin/product/getImage/${product.productId}" /></td>
+		              <td><img  style="width:50%"  alt="image" src="/admin/product/get-image/${product.productID}" /></td>
 		              <td class="success">${product.productName}</td>
 		              <td class="info">${product.productCategory}</td>
 		              <td  class="warning">${product.unitInStock}</td>
 		              <td class="success">${product.productPrice} USD</td>
 		              <td class="info"> 
-		              <a href=" <spring:url value="/product/viewProduct/${product.productId}"/>"><span class="glyphicon glyphicon-info-sign"></span></a>
-		              <a href=" <spring:url value="/admin/product/deleteProduct/${product.productId}"/>"><span class="glyphicon glyphicon-remove"></span></a>
-		              <a href=" <spring:url value="/admin/product/updateProduct/${product.productId}"/>"><span class="glyphicon glyphicon-pencil"></span></a>
+		              <a href=" <spring:url value="/product/viewProduct/${product.productID}"/>"><span class="glyphicon glyphicon-info-sign"></span></a>
+		              <a href=" <spring:url value="/admin/product/deleteProduct/${product.productID}"/>"><span class="glyphicon glyphicon-remove"></span></a>
+		              <a href=" <spring:url value="/admin/product/updateProduct/${product.productID}"/>"><span class="glyphicon glyphicon-pencil"></span></a>
 		                
 		              </td>
                      

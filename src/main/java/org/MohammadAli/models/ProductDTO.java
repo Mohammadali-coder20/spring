@@ -56,10 +56,6 @@ public class ProductDTO {
     @NotEmpty
     private String productCategory;
 
-
-    private MultipartFile productImg;
-
-
     private Map<String,String> categoryList;
 
     public ProductDTO(){
@@ -70,13 +66,25 @@ public class ProductDTO {
     }
 
 
+    @Data
     public static class CREATE extends ProductDTO{
-
+        private MultipartFile productImg;
     }
 
     @Data
     @AllArgsConstructor
     public static class DELETE{
-        private int id;
+
+        private int productID;
     }
+
+    @Data
+    public static class RETRIEVE extends ProductDTO{
+
+        private byte[] img;
+
+        private Long productID;
+    }
+
+
 }

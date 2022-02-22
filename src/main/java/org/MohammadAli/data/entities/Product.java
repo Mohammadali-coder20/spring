@@ -2,21 +2,19 @@ package org.MohammadAli.data.entities;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Product extends Audit implements Serializable {
 
 
