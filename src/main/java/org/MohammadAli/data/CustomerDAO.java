@@ -9,7 +9,7 @@ public interface CustomerDAO {
 
     Customer findUserByUserName(String username);
 
-    List<Customer> findAll();
+    List<Customer> getAll();
 
     Customer findOne(long customerID);
 

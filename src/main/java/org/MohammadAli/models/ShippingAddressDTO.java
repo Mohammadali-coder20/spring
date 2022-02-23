@@ -1,28 +1,19 @@
-package org.MohammadAli.data.entities;
-
+package org.MohammadAli.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.MohammadAli.models.ShippingAddressDTO;
+import lombok.ToString;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 
-@Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ShippingAddress extends Audit implements Serializable {
-
-
-    private static final Long serialVersionUID = 104L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long shippingAddressId;
-
+@NoArgsConstructor
+@ToString
+@Component
+public class ShippingAddressDTO {
     @NotEmpty
     private String streetName;
 
@@ -41,6 +32,16 @@ public class ShippingAddress extends Audit implements Serializable {
     @NotEmpty
     private String zipCode;
 
+    public static class CREATE extends ShippingAddressDTO{
 
+    };
+
+    public static class DELETE extends ShippingAddressDTO{
+
+    };
+
+    public static class RETRIEVE extends ShippingAddressDTO{
+
+    };
 
 }

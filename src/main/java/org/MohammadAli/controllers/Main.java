@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        String admin = encoder.encode("admin");
+        String admin = encoder.encode("1");
 
         System.out.println(admin);
     }

@@ -2,11 +2,9 @@ package org.MohammadAli.data.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -20,7 +18,5 @@ public class Authorities {
     private String username;
 
     private String authorityType;
-
-
 
 }

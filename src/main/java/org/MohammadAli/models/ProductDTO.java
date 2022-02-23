@@ -15,8 +15,8 @@ import javax.validation.constraints.Size;
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
-@Setter
+
+@Data
 @ToString
 @AllArgsConstructor
 @Component

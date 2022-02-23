@@ -5,11 +5,16 @@ import org.MohammadAli.data.entities.Customer;
 import org.MohammadAli.models.CustomerDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class CustomerServiceImpl implements CustomerService{
+@Transactional
+public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerDAO customerDAO;
@@ -17,11 +22,16 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     ModelMapper mapper;
 
+    @Autowired
+    PasswordEncoder encoder;
+
 
     @Override
-    public void addCustomer(CustomerDTO customerDTO) {
+    public void addCustomer(CustomerDTO.CREATE customerDTO) {
+        customerDTO.setPassword(encoder.encode(customerDTO.getPassword()));
         Customer mapCustomer = mapper.map(customerDTO, Customer.class);
         customerDAO.save(mapCustomer);
+        customerDTO.setCustomerID(mapCustomer.getCustomerID());
     }
 
     @Override
@@ -31,7 +41,10 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<CustomerDTO> getAllCustomer() {
-        return null;
+
+        List<Customer> all = customerDAO.getAll();
+        List<CustomerDTO> collect = all.stream().map(customer -> mapper.map(customer, CustomerDTO.class)).collect(Collectors.toList());
+        return collect;
     }
 
     @Override

@@ -1,6 +1,9 @@
 package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.Customer;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +14,8 @@ import java.util.List;
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
 
+    @Autowired
+    SessionFactory sessionFactory;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -28,8 +33,12 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public List<Customer> findAll() {
-        return null;
+    public List<Customer> getAll() {
+//        entityManager.createQuery(" Customer").getResultList();
+        Session session = getSession();
+        List from_customer = session.createQuery("from Customer").list();
+        session.close();
+        return from_customer;
     }
 
     @Override
@@ -40,5 +49,10 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public Customer findCustomerByUserNameAndPassWord(String username, String password) {
         return null;
+    }
+
+
+    public Session getSession(){
+        return sessionFactory.openSession();
     }
 }

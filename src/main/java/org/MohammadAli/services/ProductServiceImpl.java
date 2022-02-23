@@ -25,9 +25,9 @@ public class ProductServiceImpl implements ProductService{
     ModelMapper modelMapper;
 
     @Override
-    public void save(ProductDTO.CREATE dto) throws IOException {
-        Product product = modelMapper.map(dto,Product.class);
-        product.setImg(dto.getProductImg().getBytes());
+    public void save(ProductDTO.CREATE productDTO) throws IOException {
+        Product product = modelMapper.map(productDTO,Product.class);
+        product.setImg(productDTO.getProductImg().getBytes());
         productDAO.save(product);
     }
 

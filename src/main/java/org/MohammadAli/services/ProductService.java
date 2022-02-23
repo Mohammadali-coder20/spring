@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface ProductService {
-    void save(ProductDTO.CREATE dto) throws IOException;
+    void save(ProductDTO.CREATE productDTO) throws IOException;
 
     List<ProductDTO.RETRIEVE> findAll();
 

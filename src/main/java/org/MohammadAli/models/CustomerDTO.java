@@ -1,9 +1,6 @@
 package org.MohammadAli.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.MohammadAli.data.entities.BillingAddress;
 import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.ShippingAddress;
@@ -19,10 +16,10 @@ import javax.validation.constraints.Size;
 
 
 @Data
-@Component
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Component
 public class CustomerDTO {
 
     @NotEmpty
@@ -52,12 +49,19 @@ public class CustomerDTO {
     @Valid
     private BillingAddress billingAddress;
 
-    public static class CREATE extends CustomerDTO{
 
+    @Data
+    public static class CREATE extends CustomerDTO{
+        private CartDTO cart;
+        private Long customerID;
     }
 
 
     public static class REGISTER extends CustomerDTO{
+
+    }
+
+    public static class RETRIEVE extends CustomerDTO{
 
     }
 

@@ -28,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("SELECT username,password,enabled from user WHERE username = ?")
-                .authoritiesByUsernameQuery("SELECT username , authorityType form authorities WHERE username = ? ")
+                .usersByUsernameQuery("SELECT username, password, enabled from users WHERE username= ?")
+                .authoritiesByUsernameQuery("SELECT username, authorityType from authorities where username = ?")
                 .passwordEncoder(passwordEncoder());
     }
 
@@ -42,16 +42,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN,ROLE_USER")
+//                .antMatchers("/admin/**").hasAnyRole("ROLE_ADMIN,ROLE_USER")
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
-                .antMatchers("/customer/**").access("hasRole('USER')")
+//                .antMatchers("/customer/**").access("hasRole('USER')")
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied")
                 .and()
                 .logout().logoutSuccessUrl("/login?logout")
                 .and()
                 .formLogin().loginPage("/login").successHandler(savedRequestAwareAuthenticationSuccessHandler())
-                .loginProcessingUrl("/j_spring-security_check")
+                .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/login?error")
                 .usernameParameter("username")
                 .passwordParameter("password")
@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SavedRequestAwareAuthenticationSuccessHandler();
     }
 
-    @Bean
+
     public PersistentTokenRepository persistentTokenRepository(){
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         jdbcTokenRepository.setDataSource(dataSource);
