@@ -18,20 +18,21 @@ import java.util.Map;
 
 @Data
 @ToString
-@AllArgsConstructor
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
 
     @NotEmpty
-    @Size(min = 3 , max = 10)
+    @Size(min = 3 , max = 20)
     private String productName;
 
     @NotEmpty
-    @Size(min = 3 , max = 10)
+    @Size(min = 3 , max = 20)
     private String productBrand;
 
     @NotEmpty
-    @Size(min = 3 , max = 10)
+    @Size(min = 3 , max = 20)
     private String productModel;
 
     @NotEmpty
@@ -50,25 +51,29 @@ public class ProductDTO {
     private Double discount;
 
     @NotEmpty
-    @Size(min = 3 , max = 10)
+    @Size(min = 3 , max = 20)
     private String productStatus;
 
     @NotEmpty
     private String productCategory;
 
-    private Map<String,String> categoryList;
-
-    public ProductDTO(){
-        categoryList = new HashMap<>();
-        categoryList.put("Laptop","Laptop");
-        categoryList.put("Mobile","Mobile");
-        categoryList.put("TV","TV");
-    }
 
 
-    @Data
+    @Setter
+    @Getter
     public static class CREATE extends ProductDTO{
+
+        private Map<String,String> categoryList;
+
         private MultipartFile productImg;
+
+        public CREATE(){
+            super();
+            categoryList = new HashMap<>();
+            categoryList.put("Laptop","Laptop");
+            categoryList.put("Mobile","Mobile");
+            categoryList.put("TV","TV");
+        }
     }
 
     @Data
@@ -81,7 +86,7 @@ public class ProductDTO {
     @Data
     public static class RETRIEVE extends ProductDTO{
 
-        private byte[] img;
+//        private byte[] img;
 
         private Long productID;
     }

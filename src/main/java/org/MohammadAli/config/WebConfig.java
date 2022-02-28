@@ -1,5 +1,6 @@
 package org.MohammadAli.config;
 
+import org.MohammadAli.models.CustomerDTO;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.InjectionPoint;
@@ -24,6 +25,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.jsp.tagext.ValidationMessage;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages = {"org.MohammadAli.controllers","org.MohammadAli.services","org.MohammadAli.data"})
@@ -92,6 +95,12 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setMaxUploadSize(5*1024*1024);
         return resolver;
     }
+
+    @Bean
+    public List<CustomerDTO.RETRIEVE> getList(){
+        return new ArrayList<>();
+    }
+
 
 
 

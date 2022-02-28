@@ -56,11 +56,16 @@ public class ProductDAOImpl implements ProductDAO{
 //            }
 //        });
         Session session = getSession();
-        Query result = session.createQuery("select img from Product");
+        Query result = session.createQuery("select img from Product where productID = :pid").setParameter("pid",id);
         byte[] img  = (byte[]) result.list().get(0);
         session.close();
         return img;
+    }
 
+    @Override
+    public Product findProductBYID(long productID) {
+        Product product = entityManager.find(Product.class, productID);
+        return product;
     }
 
     public Session getSession(){

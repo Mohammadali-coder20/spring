@@ -1,8 +1,6 @@
 package org.MohammadAli.data.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.MohammadAli.validators.Phone;
 
 import javax.persistence.*;
@@ -13,7 +11,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer extends Audit implements Serializable {
@@ -46,7 +45,9 @@ public class Customer extends Audit implements Serializable {
 
     private boolean enabled;
 
-    @OneToOne(mappedBy = "customer")
+
+    @OneToOne
+    @JoinColumn(name="cartId")
     private Cart cart;
 
     @Valid

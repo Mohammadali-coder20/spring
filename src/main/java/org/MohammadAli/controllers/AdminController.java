@@ -2,14 +2,16 @@ package org.MohammadAli.controllers;
 
 import java.util.*;
 import lombok.AllArgsConstructor;
+import org.MohammadAli.models.CustomerDTO;
+import org.MohammadAli.models.CustomerOrderDTO;
 import org.MohammadAli.models.ProductDTO;
+import org.MohammadAli.services.CustomerOrderService;
+import org.MohammadAli.services.CustomerService;
 import org.MohammadAli.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -17,26 +19,54 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminController {
 
     private ProductService productService;
+    private CustomerService customerService;
+    private CustomerOrderService customerOrderService;
 
-
-    @GetMapping("/page")
+    @GetMapping("/admin-panel")
     public String admin(){
-        return "admin";
+        return "admin-panel";
     }
 
-    @GetMapping("/productManagement/{pageNumber}")
+
+
+    @GetMapping("/product-management/{pageNumber}")
     public String productManagement(@PathVariable Integer pageNumber , Model model){
 
         List<ProductDTO.RETRIEVE> productDTOList = productService.findAll();
         model.addAttribute("products",productDTOList);
-        return "product-Inventory";
+        return "product-inventory";
     }
 
-    @GetMapping("/product/search-product/{product-category}/{product-brand}/{product-model}")
-    public String searchProduct(@RequestParam("product-category") String category,
-                                @RequestParam("product-brand") String brand,
-                                @RequestParam("product-model") String model){
-        return "";
+
+
+    @RequestMapping(value = "/customer-management", method = RequestMethod.GET)
+    public String customerManagement(Model model){
+
+        List<CustomerDTO.RETRIEVE> customerList = customerService.findAll();
+        model.addAttribute("customers",customerList);
+        return "customer-management";
     }
+
+
+    @RequestMapping(value = "/customer-order", method = RequestMethod.GET)
+    public String customerOrder(Model model){
+
+        List<CustomerOrderDTO.RETRIEVE> orderList = customerOrderService.findAll();
+        model.addAttribute("orders", orderList);
+        return "customer-order-list";
+    }
+
+
+    @RequestMapping(value = "/customer-message/{pageIndex}", method = RequestMethod.GET)
+    public String customerMessage(@PathVariable Integer pageIndex){
+        
+        return "customer-message";
+    }
+
+
+
+
+
+
 
 }

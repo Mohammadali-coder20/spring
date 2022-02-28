@@ -46,6 +46,7 @@ public class HomeController {
         if (auth !=null)
             new SecurityContextLogoutHandler().logout(request , response , auth);
 
+        cancelCookie(request , response);
 
         return "redirect:/login?logout";
     }
@@ -55,8 +56,20 @@ public class HomeController {
         Cookie cookie = new Cookie(cookieName,null);
         cookie.setPath(StringUtils.hasLength(request.getContextPath()) ? request.getContextPath():"/");
         response.addCookie(cookie);
-
     }
+
+    @GetMapping("/about")
+    public String aboutPage(){
+        return "about";
+    }
+
+    @GetMapping("/contact")
+    public String contactPage(){
+        return "contact";
+    }
+
+
+
 
 
 

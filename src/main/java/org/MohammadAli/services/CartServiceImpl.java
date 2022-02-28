@@ -29,6 +29,7 @@ public class CartServiceImpl implements CartService{
 //        CustomerDTO.CREATE customerDTO = (CustomerDTO.CREATE) cartDTO.getCustomer();
 //        cart.getCustomer().setCustomerID(customerDTO.getCustomerID());
         cartDAO.save(cart);
+        cartDTO.setCartId(cart.getCartId());
     }
 
     @Override

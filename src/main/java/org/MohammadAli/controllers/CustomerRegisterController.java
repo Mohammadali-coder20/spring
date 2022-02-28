@@ -1,16 +1,8 @@
 package org.MohammadAli.controllers;
 
 import lombok.AllArgsConstructor;
-import org.MohammadAli.data.entities.BillingAddress;
-import org.MohammadAli.data.entities.ShippingAddress;
-import org.MohammadAli.models.AuthoritiesDTO;
-import org.MohammadAli.models.CartDTO;
-import org.MohammadAli.models.CustomerDTO;
-import org.MohammadAli.models.UserDTO;
-import org.MohammadAli.services.AuthoritiesService;
-import org.MohammadAli.services.CartService;
-import org.MohammadAli.services.CustomerService;
-import org.MohammadAli.services.UserService;
+import org.MohammadAli.models.*;
+import org.MohammadAli.services.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,28 +30,29 @@ public class CustomerRegisterController {
     private UserService userService;
     private CartService cartService;
     private AuthoritiesService authoritiesService;
+    private CartItemService cartItemService;
 
 
 
     @GetMapping("/register")
     public String register(@ModelAttribute("customer") CustomerDTO.REGISTER registerDTO){
-        registerDTO.setBillingAddress(new BillingAddress());
-        registerDTO.setShippingAddress(new ShippingAddress());
-        registerDTO.setCustomerName("123321");
-        registerDTO.setCustomerEmailAddress("a@example.com");
-        registerDTO.setCustomerPhoneNumber("09122323231");
-        registerDTO.getBillingAddress().setStreetName("123");
-        registerDTO.getBillingAddress().setApartmentNumber("123");
-        registerDTO.getBillingAddress().setCity("123");
-        registerDTO.getBillingAddress().setState("123");
-        registerDTO.getBillingAddress().setCountry("123");
-        registerDTO.getBillingAddress().setZipCode("123");
-        registerDTO.getShippingAddress().setStreetName("123");
-        registerDTO.getShippingAddress().setApartmentNumber("123");
-        registerDTO.getShippingAddress().setCity("123");
-        registerDTO.getShippingAddress().setState("123");
-        registerDTO.getShippingAddress().setCountry("123");
-        registerDTO.getShippingAddress().setZipCode("123");
+//        registerDTO.setBillingAddress(new BillingAddress());
+//        registerDTO.setShippingAddress(new ShippingAddress());
+//        registerDTO.setCustomerName("123321");
+//        registerDTO.setCustomerEmailAddress("a@example.com");
+//        registerDTO.setCustomerPhoneNumber("09122323231");
+//        registerDTO.getBillingAddress().setStreetName("123");
+//        registerDTO.getBillingAddress().setApartmentNumber("123");
+//        registerDTO.getBillingAddress().setCity("123");
+//        registerDTO.getBillingAddress().setState("123");
+//        registerDTO.getBillingAddress().setCountry("123");
+//        registerDTO.getBillingAddress().setZipCode("123");
+//        registerDTO.getShippingAddress().setStreetName("123");
+//        registerDTO.getShippingAddress().setApartmentNumber("123");
+//        registerDTO.getShippingAddress().setCity("123");
+//        registerDTO.getShippingAddress().setState("123");
+//        registerDTO.getShippingAddress().setCountry("123");
+//        registerDTO.getShippingAddress().setZipCode("123");
         return "register-customer";
     }
 
@@ -70,12 +63,12 @@ public class CustomerRegisterController {
             return "register-customer";
         }
 
-        List<CustomerDTO> customerDTOList = customerService.getAllCustomer();
+        List<CustomerDTO.LOGIN> customerDTOList = customerService.getAllCustomerForLogin();
 
         if (customerDTOList !=null){
-            Iterator<CustomerDTO> iterator = customerDTOList.iterator();
+            Iterator<CustomerDTO.LOGIN> iterator = customerDTOList.iterator();
             while (iterator.hasNext()){
-                CustomerDTO dto = iterator.next();
+                CustomerDTO.LOGIN dto = iterator.next();
                 if (dto.getCustomerEmailAddress().equalsIgnoreCase(customerDTO.getCustomerEmailAddress())){
                     model.addAttribute("emailMsg","Email is already exist");
                     return "register-customer";
@@ -90,6 +83,7 @@ public class CustomerRegisterController {
         CartDTO.CREATE cartDTO = new CartDTO.CREATE();
         UserDTO.CREATE userDTO = new UserDTO.CREATE();
         AuthoritiesDTO.CREATE authoritiesDTO = new AuthoritiesDTO.CREATE();
+        CartItemDTO.CREATE cartItemDTO = new CartItemDTO.CREATE();
 
         //persist  customer
         customerDTO.setEnabled(true);
@@ -100,6 +94,15 @@ public class CustomerRegisterController {
         cartDTO.setGrandTotal(0d);
         cartService.save(cartDTO);
 
+
+        //add persisted card to customer
+        customerDTO.setCart(cartDTO);
+        customerService.updateCustomer(customerDTO);
+
+
+//        //persist cartItem
+//        cartItemDTO.setCart(cartDTO);
+//        cartItemService.save(cartItemDTO);
 
         //persist user
         userDTO.setUsername(customerDTO.getUserName());

@@ -1,8 +1,7 @@
 package org.MohammadAli.data.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +9,8 @@ import java.util.List;
 
 
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cart extends Audit implements Serializable {
@@ -24,12 +24,12 @@ public class Cart extends Audit implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "customerId")
+    @JsonIgnore
     private Customer customer;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany( mappedBy = "cart",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
 
     private Double grandTotal;
-
 
 }

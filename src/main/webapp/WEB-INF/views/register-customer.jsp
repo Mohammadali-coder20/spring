@@ -369,16 +369,15 @@
 					   <form:input path="shippingAddress.zipCode" class="form-control" placeholder="Enter Zip Code" id="shippingAddress.zipCode" />
 					</div>
 				</div>
-				
-				<div class="form-group has-success">
-					<label class="col-xs-3 control-label"></label>
-					<div class="col-xs-9">
-						 <input type="submit" value="Submit" class="btn btn-default">
-             <a href="<c:url value="/" />"  class="btn btn-default">Cancel</a>
-					</div>
-				</div>
-			
-			 
+
+				   <div class="form-group has-success">
+					   <label class="col-xs-3 control-label"></label>
+					   <div class="col-xs-9">
+						   <input type="submit" value="Submit" class="btn btn-default">
+						   <a href="<c:url value="/" />"  class="btn btn-default">Cancel</a>
+					   </div>
+				   </div>
+
 			</form:form>
 		    
 		</div>

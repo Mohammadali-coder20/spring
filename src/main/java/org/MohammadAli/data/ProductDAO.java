@@ -14,4 +14,6 @@ public interface ProductDAO {
     void delete(int id);
 
     byte[] retrieveProductImgByID(Long Id);
+
+    Product findProductBYID(long productID);
 }

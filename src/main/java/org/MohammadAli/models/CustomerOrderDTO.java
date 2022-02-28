@@ -1,9 +1,6 @@
 package org.MohammadAli.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.MohammadAli.data.entities.BillingAddress;
 import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.Customer;
@@ -18,24 +15,42 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerOrderDTO {
 
-    private Cart cart;
-
-    private Customer customer;
-
     private ShippingAddress shippingAddress;
 
     private BillingAddress billingAddress;
 
-
+    @Setter
+    @Getter
+    @NoArgsConstructor
     public static class CREATE extends CustomerOrderDTO{
 
+        private CartDTO.CREATE cart;
+
+        private CustomerDTO.CREATE customer;
+
     }
 
+    @Setter
+    @Getter
+    @NoArgsConstructor
     public static class DELETE extends CustomerOrderDTO{
 
+        private CartDTO.DELETE cart;
+
+        private CustomerDTO.DELETE customer;
+
     }
 
+    @Setter
+    @Getter
+    @NoArgsConstructor
     public static class RETRIEVE extends CustomerOrderDTO{
+
+        private Long customerOrderID;
+
+        private CartDTO.RETRIEVE cart;
+
+        private CustomerDTO.RETRIEVE customer;
 
     }
 }

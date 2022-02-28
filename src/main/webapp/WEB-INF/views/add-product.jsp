@@ -1,11 +1,13 @@
 <%@include file="/WEB-INF/views/template/header.jsp"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="mvc" uri="http://www.springframework.org/tags" %>
+
 
 <div class="container-wrapper">
     
     <div class="container">
    
-  
+
 
 	   <div class="page-header title">
 	              <h1>Add Product</h1>
@@ -18,9 +20,7 @@
 	     
 		<div class="form-layout">
 <%--			?${_csrf.parameterName}=${_csrf.token}--%>
-	       <form:form   action="${pageContext.request.contextPath}/admin/product/save-product"   method="post" modelAttribute="product"    enctype="multipart/form-data" class="form-horizontal">
-						
-				
+	       <form:form   action="${pageContext.request.contextPath}/admin/product/save-product?${_csrf.parameterName}=${_csrf.token}"   method="post" modelAttribute="product"    enctype="multipart/form-data" class="form-horizontal">
 				<div class="row">
 			         <label class="col-xs-3 control-label" ></label>
 					 <div class="col-xs-9">

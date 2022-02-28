@@ -10,10 +10,13 @@ public interface CustomerService {
 
     CustomerDTO findCustomerByUserName(String userName);
 
-    List<CustomerDTO> getAllCustomer();
+    List<CustomerDTO.LOGIN> getAllCustomerForLogin();
 
-    CustomerDTO getCustomerByCustomerID(long customerId);
+    CustomerDTO.ADDRESS getCustomerByCustomerID(long customerId);
 
     CustomerDTO findCustomerByUserNameAndPassWord(String username, String password);
 
+    void updateCustomer(CustomerDTO.CREATE customerDTO);
+
+    List<CustomerDTO.RETRIEVE> findAll();
 }

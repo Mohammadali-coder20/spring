@@ -1,5 +1,6 @@
 package org.MohammadAli.data.entities;
 
+import antlr.collections.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

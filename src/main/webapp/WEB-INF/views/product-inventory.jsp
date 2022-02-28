@@ -16,7 +16,7 @@
                <a  class="btn btn-primary" href="<spring:url value="/admin/product/add-product"/>">Add New Product</a>
                 
                 <c:if test="${not empty search}">
-                     <a  class="btn btn-primary" href="<spring:url value="/admin/productManagement/1"/>">See All Product</a>
+                     <a  class="btn btn-primary" href="<spring:url value="/admin/product-management/1"/>">See All Product</a>
                   
                 </c:if>
            </div>
@@ -27,7 +27,7 @@
 	        
 		         <div class="searchBox">
 		         
-		            <form class="form-inline" action="<c:url value="/admin/productManagement/search/1" />" method="post">
+		            <form class="form-inline" action="<c:url value="/admin/product-management/search/1" />" method="post">
 					    <div class="form-group">
 					        <label  for="inputEmail">Search more product  :</label>
 					        <input type="text" name="searchTerm" class="form-control" style="width:300px"  id="inputEmail" placeholder="Enter Brand , model or  category name">

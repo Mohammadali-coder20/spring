@@ -1,6 +1,8 @@
 package org.MohammadAli.controllers;
 
+import lombok.AllArgsConstructor;
 import org.MohammadAli.models.ProductDTO;
+import org.MohammadAli.services.ProductService;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product/rest")
+@AllArgsConstructor
 public class ProductRestService {
 
 
@@ -28,5 +31,12 @@ public class ProductRestService {
 //        logger.info(id);
 //        return list.get(0);
 //    }
+    private ProductService productService;
+
+    @RequestMapping(value = "/get-img/{productID}", produces = "image/jpeg" , method = RequestMethod.GET)
+    public byte[] getImg(@PathVariable("productID") long productID){
+        return productService.retrieveProductImgByID(productID);
+    }
+
 
 }

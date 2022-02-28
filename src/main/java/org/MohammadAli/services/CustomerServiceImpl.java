@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,20 +41,39 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> getAllCustomer() {
+    public List<CustomerDTO.LOGIN> getAllCustomerForLogin() {
 
-        List<Customer> all = customerDAO.getAll();
-        List<CustomerDTO> collect = all.stream().map(customer -> mapper.map(customer, CustomerDTO.class)).collect(Collectors.toList());
+        List<Customer> all = customerDAO.findAll();
+        List<CustomerDTO.LOGIN> collect = all.stream()
+                                             .map(customer -> mapper.map(customer, CustomerDTO.LOGIN.class))
+                                             .collect(Collectors.toList());
         return collect;
     }
 
     @Override
-    public CustomerDTO getCustomerByCustomerID(long customerId) {
-        return null;
+    public CustomerDTO.ADDRESS getCustomerByCustomerID(long customerId) {
+        Customer one = customerDAO.findOne(customerId);
+        return mapper.map(one,CustomerDTO.ADDRESS.class);
     }
 
     @Override
     public CustomerDTO findCustomerByUserNameAndPassWord(String username, String password) {
         return null;
+    }
+
+    @Override
+    public void updateCustomer(CustomerDTO.CREATE customerDTO) {
+        Customer customer = mapper.map(customerDTO , Customer.class);
+        customerDAO.update(customer);
+    }
+
+    @Override
+    public List<CustomerDTO.RETRIEVE> findAll() {
+        List<Customer> all = customerDAO.findAll();
+
+        List<CustomerDTO.RETRIEVE> customerList = all.stream()
+                                                  .map(customer -> mapper.map(customer , CustomerDTO.RETRIEVE.class ))
+                                                  .collect(Collectors.toList());
+        return customerList;
     }
 }

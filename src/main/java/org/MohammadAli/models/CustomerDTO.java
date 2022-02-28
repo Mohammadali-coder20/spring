@@ -50,9 +50,10 @@ public class CustomerDTO {
     private BillingAddress billingAddress;
 
 
-    @Data
+    @Setter
+    @Getter
     public static class CREATE extends CustomerDTO{
-        private CartDTO cart;
+        private CartDTO.CREATE cart;
         private Long customerID;
     }
 
@@ -61,8 +62,62 @@ public class CustomerDTO {
 
     }
 
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class RETRIEVE extends CustomerDTO{
 
+        private Long customerID;
+        private CartDTO.RETRIEVE cart;
+
     }
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class DELETE extends CustomerDTO{
+
+        private Long customerID;
+        private CartDTO.DELETE cart;
+
+    }
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class LOGIN {
+
+        @NotEmpty
+        @Size(min = 3 , max = 10)
+        private String userName;
+
+        @NotEmpty
+        @Email()
+        private String customerEmailAddress;
+
+    }
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ADDRESS{
+        @Valid
+        private ShippingAddress shippingAddress;
+
+        @Valid
+        private BillingAddress billingAddress;
+
+        @NotEmpty
+        @Size(min = 3 , max = 10)
+        private String userName;
+
+
+        private Long customerID;
+    }
+
 
 }

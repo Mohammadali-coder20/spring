@@ -33,13 +33,21 @@ public class AdminProductController {
             return  "add-product";
 
         productService.save(createDTO);
-        return "redirect:/admin/productManagement/1";
+        return "redirect:/admin/product-management/1";
+    }
+
+
+    @GetMapping("/search-product/{product-category}/{product-brand}/{product-model}")
+    public String searchProduct(@RequestParam("product-category") String category,
+                                @RequestParam("product-brand") String brand,
+                                @RequestParam("product-model") String model){
+
+        return "";
     }
 
     @ResponseBody
     @GetMapping(value = "/get-image/{imgID}" , produces = "image/jpeg")
     public byte[] getImgByID(@PathVariable("imgID") Long imgID){
-
         return productService.retrieveProductImgByID(imgID);
     }
 

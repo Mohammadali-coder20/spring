@@ -51,4 +51,10 @@ public class ProductServiceImpl implements ProductService{
     public byte[] retrieveProductImgByID(Long Id) {
         return productDAO.retrieveProductImgByID(Id);
     }
+
+    @Override
+    public ProductDTO.RETRIEVE findProductByID(long productID) {
+        Product product = productDAO.findProductBYID(productID);
+        return modelMapper.map(product , ProductDTO.RETRIEVE.class);
+    }
 }
