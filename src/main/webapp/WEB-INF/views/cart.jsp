@@ -32,11 +32,12 @@
                         <th>Action</th>
                     </tr>
                     <tr ng-repeat = "item in cart.cartItems">
+                        {{item | json}}
                         <td>{{item.product.productName}}</td>
                         <td>{{item.product.productPrice}}</td>
                         <td>{{item.quantity}}</td>
                         <td>{{item.totalPrice}}</td>
-                        <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.productId)"><span class="glyphicon glyphicon-remove"></span>remove</a></td>
+                        <td><a href="#" class="label label-danger" ng-click="removeFromCart(item.product.productID)"><span class="glyphicon glyphicon-remove"></span>remove</a></td>
                     </tr>
                     <tr>
                         <th></th>
@@ -47,11 +48,12 @@
                     </tr>
                 </table>
 
-                <a href="<spring:url value="/product/productList/Laptop/1" />" class="btn btn-default">Continue Shopping</a>
+                <a href="<spring:url value="/product/product-list/all/1" />" class="btn btn-default">Continue Shopping</a>
             </div>
         </section>
 
 <!-- My -->
-<script src="<c:url value="/resources/js/controller.js" /> "></script>
+<script src="/resources/js/controller.js" /></script>
+<%--<script src="<c:url value="/resources/js/controller.js" /> "></script>--%>
 
 <%@ include file="/WEB-INF/views/template/footer.jsp" %>

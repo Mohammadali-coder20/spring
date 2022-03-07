@@ -60,7 +60,7 @@
                <tr>
                       
                      
-		              <td><img  style="width:50%"  alt="image" src="/admin/product/get-image/${product.productID}" /></td>
+		              <td><img  style="width:50%"  alt="image" src="/product/rest/get-img/${product.productID}" /></td>
 		              <td class="success">${product.productName}</td>
 		              <td class="info">${product.productCategory}</td>
 		              <td  class="warning">${product.unitInStock}</td>
@@ -71,8 +71,6 @@
 		              <a href=" <spring:url value="/admin/product/updateProduct/${product.productID}"/>"><span class="glyphicon glyphicon-pencil"></span></a>
 		                
 		              </td>
-                     
-                      
               </tr>  
            </c:forEach>
           

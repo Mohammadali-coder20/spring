@@ -8,8 +8,6 @@ public interface CustomerService {
 
     void addCustomer(CustomerDTO.CREATE customerDTO);
 
-    CustomerDTO findCustomerByUserName(String userName);
-
     List<CustomerDTO.LOGIN> getAllCustomerForLogin();
 
     CustomerDTO.ADDRESS getCustomerByCustomerID(long customerId);
@@ -19,4 +17,8 @@ public interface CustomerService {
     void updateCustomer(CustomerDTO.CREATE customerDTO);
 
     List<CustomerDTO.RETRIEVE> findAll();
+
+    CustomerDTO.INFO getCustomerInfoByUsername(String username);
+
+    CustomerDTO.RETRIEVE getCustomerByUsername(String username);
 }

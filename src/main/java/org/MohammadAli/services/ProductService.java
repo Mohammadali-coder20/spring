@@ -18,4 +18,8 @@ public interface ProductService {
     byte[] retrieveProductImgByID(Long Id);
 
     ProductDTO.RETRIEVE findProductByID(long productID);
+
+    List<ProductDTO.RETRIEVE> findProductByCategory(String category);
+
+    void remove(Long productID);
 }

@@ -1,7 +1,9 @@
 package org.MohammadAli.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,8 @@ import java.util.Map;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
+//@Accessors(chain = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductDTO {
 
     @NotEmpty

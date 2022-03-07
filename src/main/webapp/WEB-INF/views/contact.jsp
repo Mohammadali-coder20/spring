@@ -17,10 +17,18 @@
 	   
 	     
 		<div class="form-layout">
-	       <form name="loginForm"  action="<c:url value="/contact" />"   method="post"  class="form-horizontal"  >
+	       <form name="loginForm"  action="<c:url value="/customer/contact/new-message" />"   method="post"  class="form-horizontal"  >
 						
 				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
+			   <div class="form-group has-success">
+				   <label class="col-xs-3 control-label" ></label>
+				   <div class="col-xs-9">
+					   <c:if test="${not empty dto}">
+						   <div class="msg">Thank you ${dto.customer.customerName}</div>
+					   </c:if>
+				   </div>
+			   </div>
 
 				<div class="form-group has-success">
 					<label class="col-xs-3 control-label" ></label>
@@ -47,13 +55,10 @@
             <div class="col-md-12">
                <c:if test="${pageContext.request.userPrincipal.name == null}">
 					 <h1>Please Register to send Message</h1>
-					 <br/>         
-					
-					
+					 <br/>
 					<a class="btn btn-success btn-send" href="<c:url  value="/customer/register"/>"><spring:message code="register.page"  /></a>
 					<a class="btn btn-success btn-send" href="<c:url  value="/login"/>"><spring:message code="login.page"  /></a>
 			   </c:if>
-			   
 			   <c:if test="${pageContext.request.userPrincipal.name != null}">
 					          
 				<input type="submit" class="btn btn-success btn-send" value="Send message">	           

@@ -1,11 +1,15 @@
 package org.MohammadAli.controllers;
 
 import lombok.AllArgsConstructor;
+import org.MohammadAli.data.entities.BillingAddress;
+import org.MohammadAli.data.entities.ShippingAddress;
 import org.MohammadAli.models.*;
 import org.MohammadAli.services.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,23 +40,23 @@ public class CustomerRegisterController {
 
     @GetMapping("/register")
     public String register(@ModelAttribute("customer") CustomerDTO.REGISTER registerDTO){
-//        registerDTO.setBillingAddress(new BillingAddress());
-//        registerDTO.setShippingAddress(new ShippingAddress());
-//        registerDTO.setCustomerName("123321");
-//        registerDTO.setCustomerEmailAddress("a@example.com");
-//        registerDTO.setCustomerPhoneNumber("09122323231");
-//        registerDTO.getBillingAddress().setStreetName("123");
-//        registerDTO.getBillingAddress().setApartmentNumber("123");
-//        registerDTO.getBillingAddress().setCity("123");
-//        registerDTO.getBillingAddress().setState("123");
-//        registerDTO.getBillingAddress().setCountry("123");
-//        registerDTO.getBillingAddress().setZipCode("123");
-//        registerDTO.getShippingAddress().setStreetName("123");
-//        registerDTO.getShippingAddress().setApartmentNumber("123");
-//        registerDTO.getShippingAddress().setCity("123");
-//        registerDTO.getShippingAddress().setState("123");
-//        registerDTO.getShippingAddress().setCountry("123");
-//        registerDTO.getShippingAddress().setZipCode("123");
+        registerDTO.setBillingAddress(new BillingAddress());
+        registerDTO.setShippingAddress(new ShippingAddress());
+        registerDTO.setCustomerName("123321");
+        registerDTO.setCustomerEmailAddress("a@example.com");
+        registerDTO.setCustomerPhoneNumber("09122323231");
+        registerDTO.getBillingAddress().setStreetName("123");
+        registerDTO.getBillingAddress().setApartmentNumber("123");
+        registerDTO.getBillingAddress().setCity("123");
+        registerDTO.getBillingAddress().setState("123");
+        registerDTO.getBillingAddress().setCountry("123");
+        registerDTO.getBillingAddress().setZipCode("123");
+        registerDTO.getShippingAddress().setStreetName("123");
+        registerDTO.getShippingAddress().setApartmentNumber("123");
+        registerDTO.getShippingAddress().setCity("123");
+        registerDTO.getShippingAddress().setState("123");
+        registerDTO.getShippingAddress().setCountry("123");
+        registerDTO.getShippingAddress().setZipCode("123");
         return "register-customer";
     }
 
@@ -135,4 +139,5 @@ public class CustomerRegisterController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
     }
+
 }

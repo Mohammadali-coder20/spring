@@ -1,6 +1,7 @@
 package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.Cart;
+import org.MohammadAli.models.CartDTO;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -34,6 +35,20 @@ public class CartDAOImpl  implements CartDAO {
     @Override
     public void delete(int id) {
 
+    }
+
+    @Override
+    public Cart findCartByID(Long cartID) {
+        Cart cart = entityManager.find(Cart.class, cartID);
+        entityManager.flush();
+        return cart;
+    }
+
+    @Override
+    @Transactional
+    public void update(Cart cart) {
+        entityManager.merge(cart);
+        entityManager.flush();
     }
 }
 

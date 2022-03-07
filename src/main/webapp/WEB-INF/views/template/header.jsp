@@ -62,7 +62,7 @@
                         </a></li>
                         <li class=""><a href="#">Green Online Shop</a></li>
                         <li><a href="<c:url value="/" />"><spring:message code="home.page"/></a></li>
-                        <li><a href="<c:url value="/product/product-list/Laptop" />"><spring:message
+                        <li><a href="<c:url value="/product/product-list/all/1" />"><spring:message
                                 code="product.page"/></a></li>
                         <li><a href="<c:url value="/about" />"><spring:message code="about.page"/></a></li>
                         <li><a href="<c:url value="/contact" />"><spring:message code="contact.page"/></a></li>
@@ -74,7 +74,10 @@
                         <!-- <li><a href="?lang=en">English</a></li>
                             <li><a href="?lang=bn">Bangla</a></li> -->
 
-                        <security:authorize access="hasAnyRole('ADMIN' , 'USER')">
+                        <security:authorize access="hasAnyRole('ADMIN','USER')">
+<%--                            hasAnyAuthority('ADMIN','USER')--%>
+<%--                            hasAnyRole('ADMIN' , 'USER')--%>
+
 
                             <li><a>Welcome:${pageContext.request.userPrincipal.name} </a></li>
 
@@ -104,7 +107,6 @@
                                 <li><a href="<c:url value="/admin/admin-panel"/>"><spring:message code="admin.panel"/></a></li>
 
                             </security:authorize>
-
                         </security:authorize>
 
                        <security:authorize access="isAnonymous()">

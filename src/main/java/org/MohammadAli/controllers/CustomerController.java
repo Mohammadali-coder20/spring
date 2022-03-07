@@ -2,19 +2,30 @@ package org.MohammadAli.controllers;
 
 
 import lombok.AllArgsConstructor;
+import org.MohammadAli.models.CartDTO;
+import org.MohammadAli.models.CartItemDTO;
+import org.MohammadAli.models.CustomerContactDTO;
 import org.MohammadAli.models.CustomerDTO;
+import org.MohammadAli.services.CustomerContactService;
+import org.MohammadAli.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
 @RequestMapping("/customer")
 public class CustomerController {
+
+    private CustomerContactService contactService;
+
+    private CustomerService customerService;
 
     @Autowired
     private CustomerRegisterController customerRegister;
@@ -32,8 +43,33 @@ public class CustomerController {
     }
 
     @GetMapping("/cart")
-    public String showCustomerCart(){
+    public String getCart(@AuthenticationPrincipal User activeUser){
+
+        CustomerDTO.RETRIEVE customer = customerService.getCustomerByUsername(activeUser.getUsername());
+//        List<CartItemDTO.RETRIEVE> cartItems = customer.getCart().getCartItems();
+        CartDTO.RETRIEVE cartDTO = customer.getCart();
+        return "redirect:/customer/cart/"+ cartDTO.getCartId();
+    }
+
+
+    @GetMapping("/cart/{cartID}")
+    public String getCart(@PathVariable("cartID") Long cartId , Model model){
+        model.addAttribute("cartId", cartId );
         return "cart";
+    }
+
+    @PostMapping("/contact/new-message")
+    public String saveCustomerMessage(@AuthenticationPrincipal User activeUser,
+                                      @RequestParam("message") String message,
+                                      Model model,
+                                      @ModelAttribute("dto") CustomerContactDTO.CREATE dto) throws IOException {
+        CustomerDTO.INFO customerInfo =customerService.getCustomerInfoByUsername(activeUser.getUsername());
+        dto.setContactInfo(message);
+        dto.setCustomer(customerInfo);
+        contactService.save(dto);
+
+        model.addAttribute("msg" , "Your Message Has Been Successfully Sent To Online Green Shop");
+        return "contact";
     }
 
 }

@@ -22,6 +22,7 @@ public class AdminController {
     private CustomerService customerService;
     private CustomerOrderService customerOrderService;
 
+
     @GetMapping("/admin-panel")
     public String admin(){
         return "admin-panel";
@@ -59,7 +60,6 @@ public class AdminController {
 
     @RequestMapping(value = "/customer-message/{pageIndex}", method = RequestMethod.GET)
     public String customerMessage(@PathVariable Integer pageIndex){
-        
         return "customer-message";
     }
 

@@ -16,4 +16,6 @@ public interface ProductDAO {
     byte[] retrieveProductImgByID(Long Id);
 
     Product findProductBYID(long productID);
+
+    List<Product> findProductByCategory(String category);
 }

@@ -68,6 +68,13 @@ public class ProductDAOImpl implements ProductDAO{
         return product;
     }
 
+    @Override
+    public List<Product> findProductByCategory(String category) {
+        Session session = getSession();
+        List pCategoryList = session.createQuery("from Product p where p.productCategory = :pCategory").setParameter("pCategory", category).list();
+        return pCategoryList;
+    }
+
     public Session getSession(){
         return sessionFactory.openSession();
     }

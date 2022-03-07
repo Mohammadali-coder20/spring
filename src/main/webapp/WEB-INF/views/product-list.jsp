@@ -39,14 +39,14 @@
 		    <div class="col-md-3">
 		            <h1 class="Product-category">Product Category</h1>
 		             <div class="list-group popular-product">
-		                        <a href="<c:url  value="/product/productList/Laptop/1"/>" class="list-group-item">Laptop</a>
-		                         <a href="<c:url  value="/product/productList/Mobile/1"/>" class="list-group-item">Mobile </a>
-		                        <a href="<c:url  value="/product/productList/Camera/1"/>" class="list-group-item ">Camera</a>
-		                        <a href="<c:url  value="/product/productList/Tv/1"/>" class="list-group-item">Tv </a>
-		                        <a href="<c:url  value="/product/productList/Refrigerator/1"/>" class="list-group-item">Refrigerator </a>
-		                        <a href="<c:url  value="/product/productList/Tablet/1"/>" class="list-group-item">Tablet </a>
-		                        <a href="<c:url  value="/product/productList/MicroOven/1"/>" class="list-group-item">Micro Oven </a>
-		                        <a href="<c:url  value="/product/productList/Router/1"/>" class="list-group-item">Router </a>
+		                        <a href="<c:url  value="/product/product-list/Laptop/1"/>" class="list-group-item">Laptop</a>
+		                         <a href="<c:url  value="/product/product-list/Mobile/1"/>" class="list-group-item">Mobile </a>
+		                        <a href="<c:url  value="/product/product-list/Camera/1"/>" class="list-group-item ">Camera</a>
+		                        <a href="<c:url  value="/product/product-list/Tv/1"/>" class="list-group-item">Tv </a>
+		                        <a href="<c:url  value="/product/product-list/Refrigerator/1"/>" class="list-group-item">Refrigerator </a>
+		                        <a href="<c:url  value="/product/product-list/Tablet/1"/>" class="list-group-item">Tablet </a>
+		                        <a href="<c:url  value="/product/product-list/MicroOven/1"/>" class="list-group-item">Micro Oven </a>
+		                        <a href="<c:url  value="/product/product-list/Router/1"/>" class="list-group-item">Router </a>
 		                        
 		                  </div>
 		          </div>
@@ -64,7 +64,7 @@
 	        
 		         <div class="searchBox">
 		         
-		            <form class="form-inline" action="<c:url value="/product/productList/${productCategory}/1" />" method="post">
+		            <form class="form-inline" action="<c:url value="/product/product-list/${productCategory}/1" />" method="post">
 		             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					    <div class="form-group">
 					        <label  for="inputEmail">Search more ${productCategory} :</label>
@@ -115,7 +115,7 @@
                  <h2>${product.productModel}</h2>
                  <h3>${product.productPrice} USD</h3>
                
-                 <a  href=" <c:url  value="/product/view-product/${product.productID}"/>" class="btn btn-info btn-lg">View Detail</a>
+                 <a  href=" <c:url  value="/product/view-product-detail/${product.productID}"/>" class="btn btn-info btn-lg">View Detail</a>
                 
              </div>
              </div>
@@ -157,7 +157,7 @@
 	            </c:otherwise>
 	        </c:choose>
 	        <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
-	            <c:url var="pageUrl" value="/product/productList/${productCategory}/${i}" />
+	            <c:url var="pageUrl" value="/product/product-list/${productCategory}/${i}" />
 	            <c:choose>
 	                <c:when test="${i == currentPageNumber}">
 	                    <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>

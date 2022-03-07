@@ -45,10 +45,4 @@ public class AdminProductController {
         return "";
     }
 
-    @ResponseBody
-    @GetMapping(value = "/get-image/{imgID}" , produces = "image/jpeg")
-    public byte[] getImgByID(@PathVariable("imgID") Long imgID){
-        return productService.retrieveProductImgByID(imgID);
-    }
-
 }

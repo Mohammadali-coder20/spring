@@ -1,6 +1,7 @@
 package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.Cart;
+import org.MohammadAli.models.CartDTO;
 
 import java.util.List;
 
@@ -11,4 +12,8 @@ public interface CartDAO {
     List<Cart> findALl();
 
     void delete(int id);
+
+    Cart findCartByID(Long cartID);
+
+    void update(Cart cart);
 }

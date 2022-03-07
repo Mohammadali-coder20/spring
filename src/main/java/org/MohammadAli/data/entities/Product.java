@@ -1,5 +1,6 @@
 package org.MohammadAli.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
@@ -58,6 +59,7 @@ public class Product extends Audit implements Serializable {
     private byte[] img;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<CartItem> cartItems;
 
 }

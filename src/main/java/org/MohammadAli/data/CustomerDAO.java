@@ -1,7 +1,6 @@
 package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.Customer;
-import org.MohammadAli.models.CustomerDTO;
 
 import java.util.List;
 
@@ -19,4 +18,8 @@ public interface CustomerDAO {
     Customer findCustomerByUserNameAndPassWord(String username , String password);
 
     void update(Customer customer);
+
+    Customer getCustomerByUsername(String username);
+
+    Customer getCustomerCartInfoByUsername(String username);
 }

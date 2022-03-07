@@ -14,7 +14,7 @@ public class PhoneValidator implements ConstraintValidator<Phone,String> {
     @Override
     public boolean isValid(String phoneNumber, ConstraintValidatorContext constraintValidatorContext) {
         if(phoneNumber == null) return false;
-        if (phoneNumber.matches("09[1-7][1-9]\\d{7}$")) return true;
+        if (phoneNumber.matches("09[1-7][0-9]\\d{7}$")) return true;
         return false;
     }
 }

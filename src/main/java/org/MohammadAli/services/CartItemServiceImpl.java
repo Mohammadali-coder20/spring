@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-@Transactional
 public class CartItemServiceImpl implements CartItemService {
 
     @Autowired
@@ -22,18 +21,32 @@ public class CartItemServiceImpl implements CartItemService {
     ModelMapper mapper;
 
     @Override
+    @Transactional
     public void save(CartItemDTO.CREATE cartItemDTO) throws IOException {
         CartItem cartItem = mapper.map(cartItemDTO, CartItem.class);
         cartItemDAO.save(cartItem);
     }
 
     @Override
+    @Transactional
     public List<CartItemDTO.RETRIEVE> findAll() {
         return null;
     }
 
     @Override
+    @Transactional
     public void delete(CartItemDTO.DELETE deleteDTO) {
 
+    }
+
+    @Override
+    @Transactional
+    public void update(CartItemDTO cartItemDTO) {
+        cartItemDAO.update(mapper.map(cartItemDTO , CartItem.class));
+    }
+
+    @Override
+    public void remove(Long productID) {
+        cartItemDAO.remove(productID);
     }
 }

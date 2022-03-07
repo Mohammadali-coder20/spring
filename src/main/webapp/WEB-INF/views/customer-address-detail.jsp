@@ -14,7 +14,7 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr class="bg-success">
-                <th>Strret Name</th>
+                <th>Street Name</th>
                 <th>Apartment Number</th>
                 <th>City</th>
                 <th>State</th>
@@ -64,14 +64,7 @@
                 </tr>
            
         </table>
-        
-        
-        
-        
-        
-        
-        
-        
+
         
 
 <%@ include file="/WEB-INF/views/template/footer.jsp" %>

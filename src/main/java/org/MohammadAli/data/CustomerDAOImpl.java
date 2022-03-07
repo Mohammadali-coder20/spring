@@ -1,6 +1,7 @@
 package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.Customer;
+import org.MohammadAli.models.CustomerContactDTO;
 import org.MohammadAli.models.CustomerDTO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,8 +40,8 @@ public class CustomerDAOImpl implements CustomerDAO {
     public List<Customer> findAll() {
 //        entityManager.createQuery("select  from Customer").getResultList();
         Session session = getSession();
-        List from_customer = session.createQuery("from Customer").list();
-        Customer customer = (Customer) from_customer.get(0);
+        List from_customer = session.createQuery("from Customer").getResultList();
+//        Customer customer = (Customer) from_customer.get(0);
 //        customer.getCart().getCartItems();
         session.close();
         return from_customer;
@@ -65,6 +66,22 @@ public class CustomerDAOImpl implements CustomerDAO {
         entityManager.createNativeQuery("update customer  set cartId = ? where customerID = ?").setParameter(1,customer.getCart()).setParameter(2,customer.getCustomerID()).executeUpdate();
 //        entityManager.refresh(customer);
         entityManager.close();
+    }
+
+    @Override
+    public Customer getCustomerByUsername(String username) {
+        Session session = getSession();
+        Customer customer = (Customer) session.createQuery("from Customer c where c.userName = :cname").setParameter("cname",username ).getSingleResult();
+        session.close();
+        return customer;
+    }
+
+    @Override
+    public Customer getCustomerCartInfoByUsername(String username) {
+        Session session = getSession();
+        Customer customer  = (Customer) session.createQuery("from Customer c where c.userName = :cname").setParameter("cname", username).getSingleResult();
+        session.close();
+        return customer;
     }
 
 

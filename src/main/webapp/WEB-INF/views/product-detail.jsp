@@ -29,7 +29,7 @@
                     <br/>
 
 
-                    <c:set var="url" scope="page" value="/product/productList/${product.productCategory}/1"/>
+                    <c:set var="url" scope="page" value="/product/product-list/${product.productCategory}/1"/>
 
                     <c:if test="${pageContext.request.userPrincipal.name=='admin'}">
                         <c:set var="url" scope="page" value="/admin/product-management/1"/>

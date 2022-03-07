@@ -9,7 +9,7 @@ cartApp.controller("cartCtrl", function($scope, $http){
     };
  
     $scope.clearCart = function(){
-        $http.delete('/MyOnlineShopping/rest/cart/' + $scope.cartId).success($scope.refreshCart());
+        $http.delete('/rest/cart/' + $scope.cartId).success($scope.refreshCart());
     };
     
     $scope.initCartId = function(cartId){
@@ -41,7 +41,7 @@ cartApp.controller("cartCtrl", function($scope, $http){
         for (var i = 0; i < $scope.cart.cartItems.length; i++){
             grandTotal += $scope.cart.cartItems[i].totalPrice;
         }
-
+        console.log(grandTotal)
         return grandTotal;
     }
 });

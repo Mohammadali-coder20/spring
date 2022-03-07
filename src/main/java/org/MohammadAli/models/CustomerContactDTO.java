@@ -1,9 +1,6 @@
 package org.MohammadAli.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.MohammadAli.data.entities.Customer;
 import org.springframework.stereotype.Component;
 
@@ -18,19 +15,21 @@ import javax.persistence.OneToOne;
 @Component
 public class CustomerContactDTO {
 
-    private Long contactID;
 
     private String contactInfo;
 
-    private Customer customer;
 
-
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class CREATE extends CustomerContactDTO{
-
+        private CustomerDTO.INFO customer;
     }
 
+    @Data
     public static class DELETE extends CustomerContactDTO{
-
+        private Long contactID;
     }
 
     public static class RETRIEVE extends CustomerContactDTO{

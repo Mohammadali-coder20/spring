@@ -13,4 +13,8 @@ public interface CartItemService {
     List<CartItemDTO.RETRIEVE> findAll();
 
     void delete(CartItemDTO.DELETE deleteDTO);
+
+    void update(CartItemDTO cartItemDTO);
+
+    void remove(Long productID);
 }

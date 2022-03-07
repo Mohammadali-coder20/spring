@@ -1,14 +1,13 @@
 package org.MohammadAli.data.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CartItem extends Audit implements Serializable {
@@ -25,7 +24,18 @@ public class CartItem extends Audit implements Serializable {
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "productID")
     private Product product;
+
+
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    private Product product;
+//
+//    @Column (name = "productId", insertable = false, updatable = false)
+//    private Long productId;
+
+    private int quantity;
+
+    private double totalPrice;
 
 }

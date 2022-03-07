@@ -34,9 +34,8 @@ public class ProductRestService {
     private ProductService productService;
 
     @RequestMapping(value = "/get-img/{productID}", produces = "image/jpeg" , method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public byte[] getImg(@PathVariable("productID") long productID){
         return productService.retrieveProductImgByID(productID);
     }
-
-
 }

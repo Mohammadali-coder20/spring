@@ -1,6 +1,9 @@
 package org.MohammadAli.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.Product;
 import org.springframework.stereotype.Component;
@@ -15,14 +18,19 @@ public class CartItemDTO {
     private Long cartItemID;
 
 
-
-    private Product product;
-
     @Setter
     @Getter
     @NoArgsConstructor
     public static class CREATE extends CartItemDTO{
-        private CartDTO.CREATE cart;
+
+
+        private ProductDTO.RETRIEVE product;
+
+        private CartDTO.RETRIEVE cart;
+
+        private int quantity;
+
+        private double totalPrice;
     }
 
     public static class DELETE extends CartItemDTO{
@@ -33,7 +41,27 @@ public class CartItemDTO {
     @Getter
     @NoArgsConstructor
     public static class RETRIEVE extends CartItemDTO{
+
+//        @JsonIgnore
+        private ProductDTO.RETRIEVE product;
+
+        @JsonIgnore
         private CartDTO.RETRIEVE cart;
 
+        private int quantity;
+
+        private double totalPrice;
+    }
+
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    public static class INFO extends CartItemDTO {
+        private CartDTO.INFO cart;
+
+        private int quantity;
+
+        private double totalPrice;
     }
 }

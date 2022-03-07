@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,10 +34,6 @@ public class CustomerServiceImpl implements CustomerService {
         customerDTO.setCustomerID(mapCustomer.getCustomerID());
     }
 
-    @Override
-    public CustomerDTO findCustomerByUserName(String userName) {
-        return null;
-    }
 
     @Override
     public List<CustomerDTO.LOGIN> getAllCustomerForLogin() {
@@ -75,5 +70,17 @@ public class CustomerServiceImpl implements CustomerService {
                                                   .map(customer -> mapper.map(customer , CustomerDTO.RETRIEVE.class ))
                                                   .collect(Collectors.toList());
         return customerList;
+    }
+
+    @Override
+    public CustomerDTO.INFO getCustomerInfoByUsername(String username) {
+        Customer customer = customerDAO.getCustomerByUsername(username);
+        return mapper.map(customer , CustomerDTO.INFO.class);
+    }
+
+    @Override
+    public CustomerDTO.RETRIEVE getCustomerByUsername(String username) {
+       Customer customer =  customerDAO.getCustomerCartInfoByUsername(username);
+       return mapper.map(customer , CustomerDTO.RETRIEVE.class);
     }
 }

@@ -57,4 +57,15 @@ public class ProductServiceImpl implements ProductService{
         Product product = productDAO.findProductBYID(productID);
         return modelMapper.map(product , ProductDTO.RETRIEVE.class);
     }
+
+    @Override
+    public List<ProductDTO.RETRIEVE> findProductByCategory(String category) {
+        List<Product> productList = productDAO.findProductByCategory(category);
+        return productList.stream().map(product -> modelMapper.map(product,ProductDTO.RETRIEVE.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void remove(Long productID) {
+
+    }
 }

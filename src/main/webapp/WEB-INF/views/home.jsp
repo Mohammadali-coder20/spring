@@ -16,11 +16,11 @@
           <img class="first-slide" src="<c:url value="/resources/images/banner14_1.jpg"/>" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Green Online Shop</h1>
+              <h1>Green Online Shop</h1>`
               <p>Buy Latest Product safely</p>
                                
               
-              <p><a class="btn btn-lg btn-primary" href="<c:url  value="/register"/>" role="button">Sign up today</a></p>
+              <p><a class="btn btn-lg btn-primary" href="<c:url  value="/customer/register"/>" role="button">Sign up today</a></p>
             </div>
           </div>
         </div> 

@@ -1,12 +1,14 @@
 package org.MohammadAli.data;
 
+import org.MohammadAli.data.entities.CustomerContact;
+
 import java.util.List;
 
 public interface CustomerContactDAO {
 
-    void save(CustomerContactDAO customerContactDAO);
+    void save(CustomerContact customerContact);
 
-    List<CustomerContactDAO> findALl();
+    List<CustomerContact> findALl();
 
     void delete(int id);
 

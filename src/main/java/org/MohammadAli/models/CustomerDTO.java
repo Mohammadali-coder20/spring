@@ -119,5 +119,16 @@ public class CustomerDTO {
         private Long customerID;
     }
 
+    @Data
+    public static class INFO{
+
+        private Long customerID;
+
+
+        @NotEmpty
+        @Size(min = 4 , max = 10 )
+        private String customerName;
+
+    }
 
 }

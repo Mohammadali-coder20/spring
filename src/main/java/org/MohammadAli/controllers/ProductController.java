@@ -21,15 +21,19 @@ public class ProductController {
 
     private ProductService productService;
 
-    @GetMapping("/product-list/{category}")
-    public String showAllProductByCategory(@PathVariable("category") String category , Model model){
+    @GetMapping("/product-list/{category}/{pageIndex}")
+    public String showAllProductByCategory(@PathVariable("category") String category, @PathVariable("pageIndex") String pageIndex , Model model){
+        List<ProductDTO.RETRIEVE> productList;
+        if (category.equals("all"))
+            productList = productService.findAll();
+        else
+            productList = productService.findProductByCategory(category);
 
-        List<ProductDTO.RETRIEVE> all = productService.findAll();
-        model.addAttribute("products", all);
+        model.addAttribute("products", productList);
         return "product-list";
     }
 
-    @GetMapping("/view-product/{productID}")
+    @GetMapping("/view-product-detail/{productID}")
     public String showProductDetail(@PathVariable("productID") long productID , Model model){
 
         ProductDTO.RETRIEVE dto = productService.findProductByID(productID);

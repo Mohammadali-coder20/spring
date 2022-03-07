@@ -24,6 +24,13 @@ public class CartServiceImpl implements CartService{
     ModelMapper mapper;
 
     @Override
+    @Transactional
+    public CartDTO.RETRIEVE findCartByID(Long cartID) {
+        Cart cart = cartDAO.findCartByID(cartID);
+        return mapper.map(cart , CartDTO.RETRIEVE.class);
+    }
+
+    @Override
     public void save(CartDTO.CREATE cartDTO) throws IOException {
         Cart cart =  mapper.map(cartDTO ,Cart.class);
 //        CustomerDTO.CREATE customerDTO = (CustomerDTO.CREATE) cartDTO.getCustomer();
@@ -40,5 +47,10 @@ public class CartServiceImpl implements CartService{
     @Override
     public void delete(CartDTO.DELETE deleteDTO) {
 
+    }
+
+    @Override
+    public void update(CartDTO.RETRIEVE cart) {
+        cartDAO.update(mapper.map(cart , Cart.class));
     }
 }
