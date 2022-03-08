@@ -65,11 +65,21 @@ public class CartRestService {
         return cart;
     }
 
-    @RequestMapping(value = "/remove/{productID}" , method = RequestMethod.PUT)
+    @RequestMapping(value = "/remove/{productID}" , method = RequestMethod.DELETE)
     public void removeProductFromCart(@PathVariable("productID") Long productID , @AuthenticationPrincipal User activeUser){
         CustomerDTO.RETRIEVE customer = customerService.getCustomerByUsername(activeUser.getUsername());
         List<CartItemDTO.RETRIEVE> cartItems = customer.getCart().getCartItems();
         Iterator<CartItemDTO.RETRIEVE> iterator = cartItems.iterator();
+        while (iterator.hasNext()){
+            CartItemDTO.RETRIEVE nextCartItem = iterator.next();
+            if (nextCartItem.getProduct().getProductID() == productID){
+                cartService.removeCartItem(nextCartItem);
+                break;
+            }
+        }
+
+
+
 //        for (int i = 0 ; i<cartItems.size() ; i++){
 //            if (cartItems.get(i).getProduct().getProductID() == productID){
 //                cartItems.remove(i);
@@ -81,11 +91,19 @@ public class CartRestService {
 //        cartService.update(cart);
 
 
-        while(iterator.hasNext()){
-            CartItemDTO.RETRIEVE next = iterator.next();
-            if (next.getProduct().getProductID() == productID){
-                cartItemService.remove(productID);
-            }
-        }
+//        while(iterator.hasNext()){
+//            CartItemDTO.RETRIEVE next = iterator.next();
+//            if (next.getProduct().getProductID() == productID){
+//                cartItemService.remove(productID);
+//            }
+//        }
     }
+
+    @RequestMapping(value = "/{cartID}", method = RequestMethod.DELETE)
+    public void clearCart(@PathVariable("cartID") Long cartID){
+        cartService.clearCartItems(cartID);
+    }
+
+
+
 }

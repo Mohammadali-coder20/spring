@@ -35,10 +35,11 @@ public class ProductController {
 
     @GetMapping("/view-product-detail/{productID}")
     public String showProductDetail(@PathVariable("productID") long productID , Model model){
-
         ProductDTO.RETRIEVE dto = productService.findProductByID(productID);
         model.addAttribute("product", dto);
         return "product-detail";
     }
+
+
 
 }

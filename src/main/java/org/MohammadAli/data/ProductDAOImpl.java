@@ -65,6 +65,7 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public Product findProductBYID(long productID) {
         Product product = entityManager.find(Product.class, productID);
+        entityManager.close();
         return product;
     }
 
@@ -72,7 +73,19 @@ public class ProductDAOImpl implements ProductDAO{
     public List<Product> findProductByCategory(String category) {
         Session session = getSession();
         List pCategoryList = session.createQuery("from Product p where p.productCategory = :pCategory").setParameter("pCategory", category).list();
+        session.close();
         return pCategoryList;
+    }
+
+    @Override
+    public List<Product> findProductByBrandOrModelOrCategory(String searchTerm) {
+        Session session = getSession();
+        List resultList = session.createQuery("select p from Product p where  p.productCategory = :pc or p.productBrand = : pb or p.productModel = :pm ")
+                .setParameter("pc", searchTerm)
+                .setParameter("pb", searchTerm)
+                .setParameter("pm", searchTerm).getResultList();
+        session.close();
+        return resultList;
     }
 
     public Session getSession(){

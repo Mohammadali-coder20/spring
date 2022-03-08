@@ -1,6 +1,7 @@
 package org.MohammadAli.services;
 
 import org.MohammadAli.models.CartDTO;
+import org.MohammadAli.models.CartItemDTO;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,4 +17,8 @@ public interface CartService {
     void delete(CartDTO.DELETE deleteDTO);
 
     void update(CartDTO.RETRIEVE cart);
+
+    void removeCartItem(CartItemDTO.RETRIEVE nextCartItem);
+
+    void clearCartItems(Long cartID);
 }

@@ -30,6 +30,9 @@ public class Cart extends Audit implements Serializable {
     @OneToMany( mappedBy = "cart",cascade = CascadeType.ALL,fetch = FetchType.EAGER , orphanRemoval = true)
     private List<CartItem> cartItems;
 
+//    @OneToMany( mappedBy = "cart",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER , orphanRemoval = true)
+//    private List<CartItem> cartItems;
+
     private Double grandTotal;
 
 }

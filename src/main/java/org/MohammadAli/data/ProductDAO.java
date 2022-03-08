@@ -18,4 +18,6 @@ public interface ProductDAO {
     Product findProductBYID(long productID);
 
     List<Product> findProductByCategory(String category);
+
+    List<Product> findProductByBrandOrModelOrCategory(String searchTerm);
 }

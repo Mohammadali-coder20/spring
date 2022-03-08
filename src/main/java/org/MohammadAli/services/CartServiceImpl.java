@@ -2,7 +2,9 @@ package org.MohammadAli.services;
 
 import org.MohammadAli.data.CartDAO;
 import org.MohammadAli.data.entities.Cart;
+import org.MohammadAli.data.entities.CartItem;
 import org.MohammadAli.models.CartDTO;
+import org.MohammadAli.models.CartItemDTO;
 import org.MohammadAli.models.CustomerDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,15 @@ public class CartServiceImpl implements CartService{
     @Override
     public void update(CartDTO.RETRIEVE cart) {
         cartDAO.update(mapper.map(cart , Cart.class));
+    }
+
+    @Override
+    public void removeCartItem(CartItemDTO.RETRIEVE nextCartItem) {
+        cartDAO.removeCartItem(mapper.map(nextCartItem , CartItem.class));
+    }
+
+    @Override
+    public void clearCartItems(Long cartID) {
+        cartDAO.clearCartItem(cartID);
     }
 }

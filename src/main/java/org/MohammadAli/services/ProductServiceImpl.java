@@ -68,4 +68,10 @@ public class ProductServiceImpl implements ProductService{
     public void remove(Long productID) {
 
     }
+
+    @Override
+    public List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrCategory(String searchTerm) {
+         List<Product> productList = productDAO.findProductByBrandOrModelOrCategory(searchTerm);
+         return productList.stream().map(product -> modelMapper.map(product,ProductDTO.RETRIEVE.class)).collect(Collectors.toList());
+    }
 }

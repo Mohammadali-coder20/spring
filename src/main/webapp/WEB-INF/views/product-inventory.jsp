@@ -27,7 +27,7 @@
 	        
 		         <div class="searchBox">
 		         
-		            <form class="form-inline" action="<c:url value="/admin/product-management/search/1" />" method="post">
+		            <form class="form-inline" action="<c:url value="/admin/product/search-product/1" />" method="get">
 					    <div class="form-group">
 					        <label  for="inputEmail">Search more product  :</label>
 					        <input type="text" name="searchTerm" class="form-control" style="width:300px"  id="inputEmail" placeholder="Enter Brand , model or  category name">
@@ -58,18 +58,15 @@
           
            <c:forEach items="${products}" var="product">
                <tr>
-                      
-                     
 		              <td><img  style="width:50%"  alt="image" src="/product/rest/get-img/${product.productID}" /></td>
 		              <td class="success">${product.productName}</td>
 		              <td class="info">${product.productCategory}</td>
 		              <td  class="warning">${product.unitInStock}</td>
 		              <td class="success">${product.productPrice} USD</td>
 		              <td class="info"> 
-		              <a href=" <spring:url value="/product/viewProduct/${product.productID}"/>"><span class="glyphicon glyphicon-info-sign"></span></a>
+		              <a href=" <spring:url value="/product/view-product-detail/${product.productID}"/>"><span class="glyphicon glyphicon-info-sign"></span></a>
 		              <a href=" <spring:url value="/admin/product/deleteProduct/${product.productID}"/>"><span class="glyphicon glyphicon-remove"></span></a>
 		              <a href=" <spring:url value="/admin/product/updateProduct/${product.productID}"/>"><span class="glyphicon glyphicon-pencil"></span></a>
-		                
 		              </td>
               </tr>  
            </c:forEach>

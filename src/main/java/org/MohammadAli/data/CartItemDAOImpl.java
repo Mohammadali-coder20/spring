@@ -45,12 +45,15 @@ public class CartItemDAOImpl implements CartItemDAO{
     @Transactional
     public void remove(Long productID) {
 //        Session session = getSession();
-//        session.createQuery("delete CartItem c where c.id = :cid").setParameter("cid",productID);
+//        session.createQuery("delete from CartItem c where c.id = :cid").setParameter("cid",productID);
 //        session.close();
+
         CartItem cartItem = entityManager.find(CartItem.class, productID);
         entityManager.remove(cartItem);
         entityManager.close();
 //        entityManager.flush();
+
+
     }
 
     Session getSession(){

@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import org.MohammadAli.models.ProductDTO;
 import org.MohammadAli.services.ProductService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -36,13 +38,17 @@ public class AdminProductController {
         return "redirect:/admin/product-management/1";
     }
 
+    @GetMapping("/search-product/{pageNumber}")
+    public String searchProduct(@PathVariable("pageNumber") int pageNumber , @RequestParam("searchTerm") String searchTerm , Model model){
+        List<ProductDTO.RETRIEVE> productList =  productService.findProductByBrandOrModelOrCategory(searchTerm);
+        model.addAttribute("products", productList);
+        return "product-inventory";
+    }
 
-    @GetMapping("/search-product/{product-category}/{product-brand}/{product-model}")
-    public String searchProduct(@RequestParam("product-category") String category,
-                                @RequestParam("product-brand") String brand,
-                                @RequestParam("product-model") String model){
-
-        return "";
+    @RequestMapping(value = "/delete-product/{productID}", method = RequestMethod.POST)
+    public String deleteProduct(@PathVariable("productID") Long productID){
+        productService.remove(productID);
+        return "redirect:/admin/product-management/1";
     }
 
 }

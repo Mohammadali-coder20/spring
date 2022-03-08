@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -37,5 +38,15 @@ public class CartItem extends Audit implements Serializable {
     private int quantity;
 
     private double totalPrice;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+//        if (!super.equals(o)) return false;
+        CartItem cartItem = (CartItem) o;
+        return Objects.equals(cartItemID, cartItem.cartItemID);
+    }
 
 }

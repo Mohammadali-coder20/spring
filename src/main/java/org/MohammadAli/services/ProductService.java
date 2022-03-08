@@ -22,4 +22,6 @@ public interface ProductService {
     List<ProductDTO.RETRIEVE> findProductByCategory(String category);
 
     void remove(Long productID);
+
+    List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrCategory(String searchTerm);
 }
