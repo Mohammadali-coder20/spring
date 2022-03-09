@@ -21,10 +21,11 @@ public class AdminProductController {
     ProductService productService;
 
     @GetMapping("/add-product")
-    public String addProduct(@ModelAttribute("product") ProductDTO.CREATE createDTO){
+    public String addProduct(@ModelAttribute("product") ProductDTO.CREATE createDTO , @RequestParam(value = "update" , required = false) String update){
+        if (update!=null){
 
-        createDTO.setProductStatus("Brand New");
-
+        }else
+            createDTO.setProductStatus("Brand New");
         return "add-product";
     }
 
@@ -50,5 +51,16 @@ public class AdminProductController {
         productService.remove(productID);
         return "redirect:/admin/product-management/1";
     }
+
+    @RequestMapping(value = "/update-product/{productID}" , method = RequestMethod.GET)
+    public String findProductForUpdateProduct(@PathVariable("productID") Long productID , Model model){
+        ProductDTO.RETRIEVE productByID = productService.findProductByID(productID);
+        model.addAttribute("product", productByID);
+        model.addAttribute("update", "update");
+        return "add-product";
+    }
+
+
+
 
 }

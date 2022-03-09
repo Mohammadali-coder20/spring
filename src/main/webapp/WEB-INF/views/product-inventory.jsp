@@ -65,8 +65,8 @@
 		              <td class="success">${product.productPrice} USD</td>
 		              <td class="info"> 
 		              <a href=" <spring:url value="/product/view-product-detail/${product.productID}"/>"><span class="glyphicon glyphicon-info-sign"></span></a>
-		              <a href=" <spring:url value="/admin/product/deleteProduct/${product.productID}"/>"><span class="glyphicon glyphicon-remove"></span></a>
-		              <a href=" <spring:url value="/admin/product/updateProduct/${product.productID}"/>"><span class="glyphicon glyphicon-pencil"></span></a>
+		              <a href=" <spring:url value="/admin/product/delete-product/${product.productID}"/>"><span class="glyphicon glyphicon-remove"></span></a>
+		              <a href=" <spring:url value="/admin/product/update-product/${product.productID}"/>"><span class="glyphicon glyphicon-pencil"></span></a>
 		              </td>
               </tr>  
            </c:forEach>

@@ -87,12 +87,19 @@ public class ProductDTO {
         private int productID;
     }
 
-    @Data
+    @Setter
+    @Getter
+    @NoArgsConstructor
     public static class RETRIEVE extends ProductDTO{
 
-//        private byte[] img;
+        private byte[] img;
+
+        private Map<String,String> categoryList;
 
         private Long productID;
+
+        private MultipartFile productImg;
+
     }
 
 

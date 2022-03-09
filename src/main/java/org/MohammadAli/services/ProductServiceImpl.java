@@ -55,7 +55,9 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public ProductDTO.RETRIEVE findProductByID(long productID) {
         Product product = productDAO.findProductBYID(productID);
-        return modelMapper.map(product , ProductDTO.RETRIEVE.class);
+        ProductDTO.RETRIEVE map = modelMapper.map(product, ProductDTO.RETRIEVE.class);
+        map.setCategoryList(new ProductDTO.CREATE().getCategoryList());
+        return map;
     }
 
     @Override
