@@ -210,10 +210,11 @@
                     <div class="col-xs-9">
                         <c:choose>
                             <c:when test="${not empty update}">
-                                <input type="submit" value="update" class="btn btn-default">
+                                <input type="submit" value="update" class="btn btn-default/">
+                                <input type="hidden" name="productID" value="${productID}" hidden/>
                             </c:when>
                             <c:otherwise>
-                                <input type="submit" value="Submit" class="btn btn-default">
+                                <input type="submit" value="Submit" class="btn btn-default"/>
                             </c:otherwise>
                         </c:choose>
                         <a href="<c:url value="/admin/product-management/1" />" class="btn btn-default">Cancel</a>

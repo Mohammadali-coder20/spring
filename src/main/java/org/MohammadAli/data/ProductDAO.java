@@ -20,4 +20,6 @@ public interface ProductDAO {
     List<Product> findProductByCategory(String category);
 
     List<Product> findProductByBrandOrModelOrCategory(String searchTerm);
+
+    void update(Product product);
 }

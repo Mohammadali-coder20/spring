@@ -24,4 +24,6 @@ public interface ProductService {
     void remove(Long productID);
 
     List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrCategory(String searchTerm);
+
+    void update(ProductDTO.CREATE createDTO , Long productID) throws IOException;
 }

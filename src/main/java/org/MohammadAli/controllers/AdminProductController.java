@@ -30,12 +30,14 @@ public class AdminProductController {
     }
 
     @PostMapping("/save-product")
-    public String saveProduct(@Valid @ModelAttribute("product") ProductDTO.CREATE createDTO , BindingResult result) throws IOException {
+    public String saveProduct(@Valid @ModelAttribute("product") ProductDTO.CREATE createDTO , BindingResult result , Long productID) throws IOException {
 
         if (result.hasErrors())
             return  "add-product";
-
-        productService.save(createDTO);
+        if (productID != null)
+            productService.update(createDTO , productID);
+        else
+            productService.save(createDTO);
         return "redirect:/admin/product-management/1";
     }
 

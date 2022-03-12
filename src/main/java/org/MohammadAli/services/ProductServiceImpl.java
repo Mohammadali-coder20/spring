@@ -76,4 +76,12 @@ public class ProductServiceImpl implements ProductService{
          List<Product> productList = productDAO.findProductByBrandOrModelOrCategory(searchTerm);
          return productList.stream().map(product -> modelMapper.map(product,ProductDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
+
+    @Override
+    public void update(ProductDTO.CREATE createDTO , Long productID) throws IOException {
+        Product product = modelMapper.map(createDTO , Product.class);
+        product.setProductID(productID);
+        product.setImg(createDTO.getProductImg().getBytes());
+        productDAO.update(product);
+    }
 }

@@ -88,6 +88,13 @@ public class ProductDAOImpl implements ProductDAO{
         return resultList;
     }
 
+    @Override
+    @Transactional
+    public void update(Product product) {
+        entityManager.merge(product);
+        entityManager.flush();
+    }
+
     public Session getSession(){
         return sessionFactory.openSession();
     }
