@@ -39,7 +39,4 @@ public class ProductController {
         model.addAttribute("product", dto);
         return "product-detail";
     }
-
-
-
 }
