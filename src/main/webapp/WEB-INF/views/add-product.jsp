@@ -175,8 +175,7 @@
                 <div class="form-group has-success">
                     <label class="col-xs-3 control-label" for="discount">Product Discount(%):</label>
                     <div class="col-xs-9">
-                        <form:input path="discount" class="form-control" placeholder="Enter Product Discount"
-                                    id="discount"/>
+                        <form:input path="discount" class="form-control" placeholder="Enter Product Discount" id="discount"/>
                     </div>
                 </div>
 

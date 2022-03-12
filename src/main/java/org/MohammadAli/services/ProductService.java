@@ -13,8 +13,6 @@ public interface ProductService {
 
     List<ProductDTO.RETRIEVE> findAll();
 
-    void delete(ProductDTO.DELETE deleteDTO);
-
     byte[] retrieveProductImgByID(Long Id);
 
     ProductDTO.RETRIEVE findProductByID(long productID);

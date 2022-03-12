@@ -43,11 +43,6 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void delete(ProductDTO.DELETE deleteDTO) {
-        productDAO.delete(deleteDTO.getProductID());
-    }
-
-    @Override
     public byte[] retrieveProductImgByID(Long Id) {
         return productDAO.retrieveProductImgByID(Id);
     }
@@ -56,7 +51,6 @@ public class ProductServiceImpl implements ProductService{
     public ProductDTO.RETRIEVE findProductByID(long productID) {
         Product product = productDAO.findProductBYID(productID);
         ProductDTO.RETRIEVE map = modelMapper.map(product, ProductDTO.RETRIEVE.class);
-        map.setCategoryList(new ProductDTO.CREATE().getCategoryList());
         return map;
     }
 
@@ -68,7 +62,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public void remove(Long productID) {
-
+        productDAO.delete(productID);
     }
 
     @Override

@@ -57,9 +57,16 @@ public class AdminProductController {
     @RequestMapping(value = "/update-product/{productID}" , method = RequestMethod.GET)
     public String findProductForUpdateProduct(@PathVariable("productID") Long productID , Model model){
         ProductDTO.RETRIEVE productByID = productService.findProductByID(productID);
+        productByID.init();
         model.addAttribute("product", productByID);
         model.addAttribute("update", "update");
         return "add-product";
+    }
+
+    @RequestMapping(value = "/delete-product/{productID}")
+    public String removeProduct(@PathVariable("productID") Long productID){
+        productService.remove(productID);
+        return "redirect:/admin/product-management/1";
     }
 
 

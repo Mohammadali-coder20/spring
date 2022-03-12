@@ -84,7 +84,7 @@ public class ProductDTO {
     @AllArgsConstructor
     public static class DELETE{
 
-        private int productID;
+        private Long productID;
     }
 
     @Setter
@@ -99,6 +99,13 @@ public class ProductDTO {
         private Long productID;
 
         private MultipartFile productImg;
+
+        public void init(){
+            categoryList = new HashMap<>();
+            categoryList.put("Laptop","Laptop");
+            categoryList.put("Mobile","Mobile");
+            categoryList.put("TV","TV");
+        }
 
     }
 
