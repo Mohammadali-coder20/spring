@@ -10,6 +10,6 @@ public interface CustomerContactDAO {
 
     List<CustomerContact> findALl();
 
-    void delete(int id);
+    void delete(Long id);
 
 }

@@ -11,6 +11,6 @@ public interface CustomerContactService {
 
     List<CustomerContactDTO.RETRIEVE> findAll();
 
-    void delete(CustomerContactDTO.DELETE deleteDTO);
+    void delete(Long contactID);
 
 }

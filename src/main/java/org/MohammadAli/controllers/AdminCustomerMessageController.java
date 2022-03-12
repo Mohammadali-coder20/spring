@@ -1,24 +1,21 @@
 package org.MohammadAli.controllers;
 
 import lombok.AllArgsConstructor;
+import org.MohammadAli.services.CustomerContactService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/customer-message")
 @AllArgsConstructor
 public class AdminCustomerMessageController {
 
-//    @GetMapping("/{pageIndex}")
-//    public String showCustomerMessage(@PathVariable("pageIndex") Integer pageIndex){
-//        return "";
-//    }
+    private CustomerContactService customerContactService;
 
-    @GetMapping("/delete-message")
-    public String deleteMessage(){
-        return "";
+    @RequestMapping(value = "/delete-message" , method = RequestMethod.POST)
+    public String deleteMessage(@RequestParam("customerMessageId") Long contactID){
+        customerContactService.delete(contactID);
+        return "redirect:/admin/customer-message/1";
     }
 
 

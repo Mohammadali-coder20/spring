@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,12 +33,18 @@ public class CustomerContactDAOImpl implements CustomerContactDAO {
 
     @Override
     public List<CustomerContact> findALl() {
-        return null;
+        try(Session session = getSession()){
+            List customerContact = session.createQuery("from CustomerContact").getResultList();
+            return customerContact;
+        }
     }
 
     @Override
-    public void delete(int id) {
-
+    @Transactional
+    public void delete(Long id) {
+        CustomerContact customerContact = entityManager.find(CustomerContact.class, id);
+        entityManager.remove(customerContact);
+        entityManager.flush();
     }
 
     Session getSession(){

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,12 +31,13 @@ public class CustomerContactServiceImpl implements CustomerContactService{
 
     @Override
     public List<CustomerContactDTO.RETRIEVE> findAll() {
-        return null;
+        List<CustomerContact> aLl = contactDAO.findALl();
+        return aLl.stream().map(contactDAO -> mapper.map(contactDAO , CustomerContactDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
     @Override
-    public void delete(CustomerContactDTO.DELETE deleteDTO) {
-
+    public void delete(Long contactID) {
+        contactDAO.delete(contactID);
     }
 
 }

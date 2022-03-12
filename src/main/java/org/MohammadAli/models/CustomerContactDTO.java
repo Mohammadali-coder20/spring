@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import java.util.Date;
 
 @Data
 @ToString
@@ -29,10 +30,18 @@ public class CustomerContactDTO {
 
     @Data
     public static class DELETE extends CustomerContactDTO{
+
         private Long contactID;
     }
 
+    @Setter
+    @Getter
     public static class RETRIEVE extends CustomerContactDTO{
 
+        private Long contactID;
+
+        private CustomerDTO.INFO customer;
+
+        private Date updateDate;
     }
 }
