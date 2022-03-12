@@ -183,7 +183,7 @@
                     <div class="form-group has-success">
                         <label class="col-xs-3 control-label" for="productImage">product Picture :</label>
                         <div class="col-xs-9">
-                            <img style="width:50%" alt="image" src="/product/rest/get-img/${productID}"/>
+                            <img style="width:50%" alt="image"  src="/product/rest/get-img/${productID}"/>
                         </div>
                     </div>
                 </c:if>

@@ -91,6 +91,9 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     @Transactional
     public void update(Product product) {
+        if (product.getImg().length == 0){
+            product.setImg(entityManager.find(Product.class, product.getProductID()).getImg());
+        }
         entityManager.merge(product);
         entityManager.flush();
     }
