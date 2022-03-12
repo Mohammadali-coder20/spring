@@ -68,7 +68,7 @@
 		             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					    <div class="form-group">
 					        <label  for="inputEmail">Search more ${productCategory} :</label>
-					        <input type="text" name="searchTerm" class="form-control" id="inputEmail" placeholder="Enter Brand , model name">
+					        <input type="text" name="searchTerm" class="form-control" id="inputEmail" placeholder="Enter Brand , model name ">
 					    </div>
 					    <input type="hidden"  value="search" name="search">
 					    <button type="submit" class="btn btn-primary">Search Product</button>

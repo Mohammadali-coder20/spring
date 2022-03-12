@@ -22,7 +22,7 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/product-list/{category}/{pageIndex}")
-    public String showAllProductByCategory(@PathVariable("category") String category, @PathVariable("pageIndex") String pageIndex , Model model){
+    public String showAllProductByCategory(@PathVariable("category") String category, @PathVariable("pageIndex") String pageIndex , String searchTerm , Model model){
         List<ProductDTO.RETRIEVE> productList;
         if (category.equals("all"))
             productList = productService.findAll();

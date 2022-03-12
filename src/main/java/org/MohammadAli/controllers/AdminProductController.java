@@ -21,41 +21,45 @@ public class AdminProductController {
     ProductService productService;
 
     @GetMapping("/add-product")
-    public String addProduct(@ModelAttribute("product") ProductDTO.CREATE createDTO , @RequestParam(value = "update" , required = false) String update){
-        if (update!=null){
+    public String addProduct(@ModelAttribute("product") ProductDTO.CREATE createDTO, @RequestParam(value = "update", required = false) String update) {
+        if (update != null) {
 
-        }else
+        } else
             createDTO.setProductStatus("Brand New");
         return "add-product";
     }
 
     @PostMapping("/save-product")
-    public String saveProduct(@Valid @ModelAttribute("product") ProductDTO.CREATE createDTO , BindingResult result , Long productID) throws IOException {
+    public String saveProduct(@Valid @ModelAttribute("product") ProductDTO.CREATE createDTO, BindingResult result, Long productID) throws IOException {
 
         if (result.hasErrors())
-            return  "add-product";
+            return "add-product";
         if (productID != null)
-            productService.update(createDTO , productID);
+            productService.update(createDTO, productID);
         else
             productService.save(createDTO);
         return "redirect:/admin/product-management/1";
     }
 
     @GetMapping("/search-product/{pageNumber}")
-    public String searchProduct(@PathVariable("pageNumber") int pageNumber , @RequestParam("searchTerm") String searchTerm , Model model){
-        List<ProductDTO.RETRIEVE> productList =  productService.findProductByBrandOrModelOrCategory(searchTerm);
+    public String searchProduct(@PathVariable("pageNumber") int pageNumber, @RequestParam("searchTerm") String searchTerm, Model model) {
+        List<ProductDTO.RETRIEVE> productList;
+        if (searchTerm.equals(""))
+            productList = productService.findAll();
+        else
+            productList = productService.findProductByBrandOrModelOrCategory(searchTerm);
         model.addAttribute("products", productList);
         return "product-inventory";
     }
 
     @RequestMapping(value = "/delete-product/{productID}", method = RequestMethod.POST)
-    public String deleteProduct(@PathVariable("productID") Long productID){
+    public String deleteProduct(@PathVariable("productID") Long productID) {
         productService.remove(productID);
         return "redirect:/admin/product-management/1";
     }
 
-    @RequestMapping(value = "/update-product/{productID}" , method = RequestMethod.GET)
-    public String findProductForUpdateProduct(@PathVariable("productID") Long productID , Model model){
+    @RequestMapping(value = "/update-product/{productID}", method = RequestMethod.GET)
+    public String findProductForUpdateProduct(@PathVariable("productID") Long productID, Model model) {
         ProductDTO.RETRIEVE productByID = productService.findProductByID(productID);
         productByID.init();
         model.addAttribute("product", productByID);
@@ -64,12 +68,10 @@ public class AdminProductController {
     }
 
     @RequestMapping(value = "/delete-product/{productID}")
-    public String removeProduct(@PathVariable("productID") Long productID){
+    public String removeProduct(@PathVariable("productID") Long productID) {
         productService.remove(productID);
         return "redirect:/admin/product-management/1";
     }
-
-
 
 
 }
