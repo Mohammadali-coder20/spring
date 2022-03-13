@@ -7,7 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +32,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<ProductDTO.RETRIEVE> findAll() {
-        List<Product> productList = productDAO.findALl();
+        List<Product> productList = productDAO.findAll();
         List<ProductDTO.RETRIEVE> productDTOList = productList
                                                      .stream()
                                                      .map(Product -> modelMapper.map(Product,ProductDTO.RETRIEVE.class))
@@ -49,25 +48,27 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductDTO.RETRIEVE findProductByID(long productID) {
-        Product product = productDAO.findProductBYID(productID);
+//        Product product = productDAO.findById(productID).get();
+//        Product product = productDAO.findById(productID).orElse(new Product());
+        Product product = productDAO.findById(productID).orElseThrow(() -> new RuntimeException("there is no such product"));
         ProductDTO.RETRIEVE map = modelMapper.map(product, ProductDTO.RETRIEVE.class);
         return map;
     }
 
     @Override
     public List<ProductDTO.RETRIEVE> findProductByCategory(String category) {
-        List<Product> productList = productDAO.findProductByCategory(category);
+        List<Product> productList = productDAO.findAllByProductCategory(category);
         return productList.stream().map(product -> modelMapper.map(product,ProductDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
     @Override
     public void remove(Long productID) {
-        productDAO.delete(productID);
+        productDAO.deleteById(productID);
     }
 
     @Override
-    public List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrCategory(String searchTerm) {
-         List<Product> productList = productDAO.findProductByBrandOrModelOrCategory(searchTerm);
+    public List<ProductDTO.RETRIEVE> findProductByBrandOrModel(String searchTerm, String category) {
+         List<Product> productList = productDAO.findProductByBrandOrModel(searchTerm , category);
          return productList.stream().map(product -> modelMapper.map(product,ProductDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
@@ -76,6 +77,6 @@ public class ProductServiceImpl implements ProductService{
         Product product = modelMapper.map(createDTO , Product.class);
         product.setProductID(productID);
         product.setImg(createDTO.getProductImg().getBytes());
-        productDAO.update(product);
+        productDAO.save(product);
     }
 }

@@ -10,8 +10,6 @@ import org.MohammadAli.services.CartService;
 import org.MohammadAli.services.CustomerService;
 import org.MohammadAli.services.ProductService;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +32,7 @@ public class CartRestService {
     @RequestMapping(value = "/add/{productID}", method = RequestMethod.PUT)
 //    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addItem(@AuthenticationPrincipal User activeUser, @PathVariable("productID") long productID) throws IOException {
-        CustomerDTO.RETRIEVE customer = customerService.getCustomerByUsername(activeUser.getUsername());
+        CustomerDTO.RETRIEVE customer = customerService.getCustomerCartAndCustomerIdByUsername(activeUser.getUsername());
         CartDTO.RETRIEVE cart = customer.getCart();
         ProductDTO.RETRIEVE product = productService.findProductByID(productID);
         List<CartItemDTO.RETRIEVE> cartItems = cart.getCartItems();
@@ -67,7 +65,7 @@ public class CartRestService {
 
     @RequestMapping(value = "/remove/{productID}" , method = RequestMethod.DELETE)
     public void removeProductFromCart(@PathVariable("productID") Long productID , @AuthenticationPrincipal User activeUser){
-        CustomerDTO.RETRIEVE customer = customerService.getCustomerByUsername(activeUser.getUsername());
+        CustomerDTO.RETRIEVE customer = customerService.getCustomerCartAndCustomerIdByUsername(activeUser.getUsername());
         List<CartItemDTO.RETRIEVE> cartItems = customer.getCart().getCartItems();
         Iterator<CartItemDTO.RETRIEVE> iterator = cartItems.iterator();
         while (iterator.hasNext()){

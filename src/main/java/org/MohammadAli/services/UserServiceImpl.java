@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -29,12 +30,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public List<UserDTO.RETRIEVE> findAll() {
-        return null;
+        List<Users> all = userDAO.findAll();
+        return all.stream().map(users -> mapper.map(users , UserDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
     @Override
     public void delete(UserDTO.DELETE deleteDTO) {
-
+        userDAO.deleteById(deleteDTO.getUserID());
     }
 
 

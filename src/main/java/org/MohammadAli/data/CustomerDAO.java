@@ -1,25 +1,14 @@
 package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface CustomerDAO {
-    
+@Repository
+public interface CustomerDAO extends JpaRepository<Customer , Long> {
 
-    void save(Customer customer);
+    Customer getCustomerByUserName(String userName);
 
-    Customer findUserByUserName(String username);
-
-    List<Customer> findAll();
-
-    Customer findOne(long customerID);
-
-    Customer findCustomerByUserNameAndPassWord(String username , String password);
-
-    void update(Customer customer);
-
-    Customer getCustomerByUsername(String username);
-
-    Customer getCustomerCartInfoByUsername(String username);
 }

@@ -20,5 +20,5 @@ public interface CustomerService {
 
     CustomerDTO.INFO getCustomerInfoByUsername(String username);
 
-    CustomerDTO.RETRIEVE getCustomerByUsername(String username);
+    CustomerDTO.RETRIEVE getCustomerCartAndCustomerIdByUsername(String username);
 }

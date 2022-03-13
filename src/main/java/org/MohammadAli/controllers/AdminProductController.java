@@ -42,12 +42,12 @@ public class AdminProductController {
     }
 
     @GetMapping("/search-product/{pageNumber}")
-    public String searchProduct(@PathVariable("pageNumber") int pageNumber, @RequestParam("searchTerm") String searchTerm, Model model) {
+    public String searchProduct(@PathVariable("pageNumber") int pageNumber, @RequestParam("searchTerm") String searchTerm, String category, Model model) {
         List<ProductDTO.RETRIEVE> productList;
         if (searchTerm.equals(""))
             productList = productService.findAll();
         else
-            productList = productService.findProductByBrandOrModelOrCategory(searchTerm);
+            productList = productService.findProductByBrandOrModel(searchTerm, category );
         model.addAttribute("products", productList);
         return "product-inventory";
     }

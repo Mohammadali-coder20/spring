@@ -2,17 +2,13 @@ package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.CartItem;
 import org.MohammadAli.models.CartItemDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface CartItemDAO {
+@Repository
+public interface CartItemDAO extends JpaRepository<CartItem , Long> {
 
-    void save(CartItem cartItem);
-
-    List<CartItem> findALl();
-
-
-    void update(CartItem cartItem);
-
-    void remove(Long productID);
+    void removeByProduct_ProductID(Long productID);
 }

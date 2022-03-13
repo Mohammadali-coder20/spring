@@ -2,14 +2,14 @@ package org.MohammadAli.data;
 
 import org.MohammadAli.data.entities.Authorities;
 import org.MohammadAli.data.entities.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface AuthoritiesDAO {
+@Repository
+public interface AuthoritiesDAO extends JpaRepository<Authorities , Long> {
 
-    void save(Authorities authorities);
 
-    List<Authorities> findALl();
 
-    void delete(int id);
 }

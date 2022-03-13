@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -29,11 +30,12 @@ public class AuthoritiesServiceImpl implements AuthoritiesService{
 
     @Override
     public List<AuthoritiesDTO.RETRIEVE> findAll() {
-        return null;
+        List<Authorities> all = authoritiesDAO.findAll();
+        return all.stream().map(authorities -> mapper.map(authorities , AuthoritiesDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
     @Override
     public void delete(AuthoritiesDTO.DELETE deleteDTO) {
-
+        authoritiesDAO.deleteById(deleteDTO.getAuthoritiesID());
     }
 }

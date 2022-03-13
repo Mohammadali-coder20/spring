@@ -24,7 +24,7 @@ import java.util.Properties;
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"org.MohammadAli.data"})
-public class JpaConfig {
+ public class JpaConfig {
 
     @Autowired
     Environment env;
@@ -40,7 +40,7 @@ public class JpaConfig {
 //    }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean managerFactoryBean(){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
@@ -77,10 +77,10 @@ public class JpaConfig {
 
     @Bean
     @Autowired
-    public PlatformTransactionManager platformTransactionManager(EntityManagerFactory managerFactory) {
+    public PlatformTransactionManager platformTransactionManager(EntityManagerFactory entityManagerFactory) {
         {
             JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-            jpaTransactionManager.setEntityManagerFactory(managerFactory);
+            jpaTransactionManager.setEntityManagerFactory(entityManagerFactory);
             return jpaTransactionManager;
         }
     }

@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO.ADDRESS getCustomerByCustomerID(long customerId) {
-        Customer one = customerDAO.findOne(customerId);
+        Customer one = customerDAO.findById(customerId).orElseGet(() -> new Customer(0L,"none", "none","none","none","none",true,null , null ,null));
         return mapper.map(one,CustomerDTO.ADDRESS.class);
     }
 
@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateCustomer(CustomerDTO.CREATE customerDTO) {
         Customer customer = mapper.map(customerDTO , Customer.class);
-        customerDAO.update(customer);
+        customerDAO.save(customer);
     }
 
     @Override
@@ -74,13 +74,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO.INFO getCustomerInfoByUsername(String username) {
-        Customer customer = customerDAO.getCustomerByUsername(username);
+        Customer customer = customerDAO.getCustomerByUserName(username);
         return mapper.map(customer , CustomerDTO.INFO.class);
     }
 
     @Override
-    public CustomerDTO.RETRIEVE getCustomerByUsername(String username) {
-       Customer customer =  customerDAO.getCustomerCartInfoByUsername(username);
+    public CustomerDTO.RETRIEVE getCustomerCartAndCustomerIdByUsername(String username) {
+       Customer customer =  customerDAO.getCustomerByUserName(username);
        return mapper.map(customer , CustomerDTO.RETRIEVE.class);
     }
 }

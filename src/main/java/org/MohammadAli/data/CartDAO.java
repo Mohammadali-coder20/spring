@@ -3,22 +3,20 @@ package org.MohammadAli.data;
 import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.CartItem;
 import org.MohammadAli.models.CartDTO;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.support.JpaEvaluationContextExtension;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface CartDAO {
+@Repository
+public interface CartDAO extends JpaRepository {
 
-    void save(Cart cart);
+    @Query("delete from Cart c where c.cartItems =:cartItem")
+    void removeCartItem(@Param("cartItem") CartItem cartItem);
 
-    List<Cart> findALl();
-
-    void delete(int id);
-
-    Cart findCartByID(Long cartID);
-
-    void update(Cart cart);
-
-    void removeCartItem(CartItem cartItem);
-
-    void clearCartItem(Long cartID);
+    @Query("delete from Cart c where c.cartId =: cartID")
+    void clearCartItem(@Param("cartID") Long cartID);
 }

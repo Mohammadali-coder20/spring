@@ -1,10 +1,7 @@
 package org.MohammadAli.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.MohammadAli.data.entities.Customer;
 import org.springframework.stereotype.Component;
 
@@ -25,13 +22,21 @@ public class UserDTO {
     private boolean enabled;
 
 
-    @Data
+
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class CREATE extends UserDTO{
         private CustomerDTO.CREATE customer;
     }
 
+    @Setter
+    @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class DELETE extends UserDTO{
-
+        private Long userID;
     }
 
     public static class RETRIEVE extends UserDTO{

@@ -3,7 +3,6 @@ package org.MohammadAli.controllers;
 
 import lombok.AllArgsConstructor;
 import org.MohammadAli.models.CartDTO;
-import org.MohammadAli.models.CartItemDTO;
 import org.MohammadAli.models.CustomerContactDTO;
 import org.MohammadAli.models.CustomerDTO;
 import org.MohammadAli.services.CustomerContactService;
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -45,7 +43,7 @@ public class CustomerController {
     @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User activeUser){
 
-        CustomerDTO.RETRIEVE customer = customerService.getCustomerByUsername(activeUser.getUsername());
+        CustomerDTO.RETRIEVE customer = customerService.getCustomerCartAndCustomerIdByUsername(activeUser.getUsername());
 //        List<CartItemDTO.RETRIEVE> cartItems = customer.getCart().getCartItems();
         CartDTO.RETRIEVE cartDTO = customer.getCart();
         return "redirect:/customer/cart/"+ cartDTO.getCartId();

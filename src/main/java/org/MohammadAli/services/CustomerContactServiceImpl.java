@@ -31,13 +31,13 @@ public class CustomerContactServiceImpl implements CustomerContactService{
 
     @Override
     public List<CustomerContactDTO.RETRIEVE> findAll() {
-        List<CustomerContact> aLl = contactDAO.findALl();
+        List<CustomerContact> aLl = contactDAO.findAll();
         return aLl.stream().map(contactDAO -> mapper.map(contactDAO , CustomerContactDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
     @Override
     public void delete(Long contactID) {
-        contactDAO.delete(contactID);
+        contactDAO.deleteById(contactID);
     }
 
 }

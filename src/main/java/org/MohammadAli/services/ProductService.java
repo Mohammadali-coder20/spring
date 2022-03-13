@@ -1,8 +1,6 @@
 package org.MohammadAli.services;
 
 import org.MohammadAli.models.ProductDTO;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +19,7 @@ public interface ProductService {
 
     void remove(Long productID);
 
-    List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrCategory(String searchTerm);
+    List<ProductDTO.RETRIEVE> findProductByBrandOrModel(String searchTerm, String category);
 
     void update(ProductDTO.CREATE createDTO , Long productID) throws IOException;
 }

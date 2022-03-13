@@ -42,11 +42,11 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     @Transactional
     public void update(CartItemDTO cartItemDTO) {
-        cartItemDAO.update(mapper.map(cartItemDTO , CartItem.class));
+        cartItemDAO.save(mapper.map(cartItemDTO , CartItem.class));
     }
 
     @Override
     public void remove(Long productID) {
-        cartItemDAO.remove(productID);
+        cartItemDAO.removeByProduct_ProductID(productID);
     }
 }

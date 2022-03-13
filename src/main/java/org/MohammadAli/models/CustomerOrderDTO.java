@@ -35,6 +35,8 @@ public class CustomerOrderDTO {
     @NoArgsConstructor
     public static class DELETE extends CustomerOrderDTO{
 
+        private Long customerOrderID;
+
         private CartDTO.DELETE cart;
 
         private CustomerDTO.DELETE customer;

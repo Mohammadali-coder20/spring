@@ -30,7 +30,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService{
 
     @Override
     public List<CustomerOrderDTO.RETRIEVE> findAll() {
-        List<CustomerOrder> orders = customerOrderDAO.findALl();
+        List<CustomerOrder> orders = customerOrderDAO.findAll();
         return orders.stream()
                      .map(customerOrder -> mapper.map(customerOrder , CustomerOrderDTO.RETRIEVE.class))
                      .collect(Collectors.toList());
@@ -38,6 +38,6 @@ public class CustomerOrderServiceImpl implements CustomerOrderService{
 
     @Override
     public void delete(CustomerOrderDTO.DELETE deleteDTO) {
-
+        customerOrderDAO.deleteById(deleteDTO.getCustomerOrderID());
     }
 }

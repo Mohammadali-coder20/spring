@@ -1,9 +1,6 @@
 package org.MohammadAli.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Data
@@ -21,8 +18,12 @@ public class AuthoritiesDTO {
 
     }
 
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class DELETE extends AuthoritiesDTO{
-
+        private Long authoritiesID;
     }
 
     public static class RETRIEVE extends AuthoritiesDTO{
