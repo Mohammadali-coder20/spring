@@ -56,7 +56,7 @@ public class CartServiceImpl implements CartService{
 
     @Override
     public void removeCartItem(CartItemDTO.RETRIEVE nextCartItem) {
-        cartDAO.removeCartItem(mapper.map(nextCartItem , CartItem.class));
+        cartDAO.removeCartItem(mapper.map(nextCartItem , CartItem.class).getCartItemID());
     }
 
     @Override

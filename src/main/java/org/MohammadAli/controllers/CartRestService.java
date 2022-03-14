@@ -67,6 +67,8 @@ public class CartRestService {
     public void removeProductFromCart(@PathVariable("productID") Long productID , @AuthenticationPrincipal User activeUser){
         CustomerDTO.RETRIEVE customer = customerService.getCustomerCartAndCustomerIdByUsername(activeUser.getUsername());
         List<CartItemDTO.RETRIEVE> cartItems = customer.getCart().getCartItems();
+//        cartItemService.remove(customer.getCart().getCartId());
+
         Iterator<CartItemDTO.RETRIEVE> iterator = cartItems.iterator();
         while (iterator.hasNext()){
             CartItemDTO.RETRIEVE nextCartItem = iterator.next();

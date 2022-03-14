@@ -22,7 +22,7 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:database.properties")
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories(basePackages = {"org.MohammadAli.data"})
  public class JpaConfig {
 
@@ -44,11 +44,12 @@ import java.util.Properties;
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
-        factoryBean.setPackagesToScan(" org.MohammadAli.data.entities");
+        factoryBean.setPackagesToScan("org.MohammadAli.data.entities");
         factoryBean.setJpaProperties(hibernateProperties());
         return factoryBean;
     }
 
+    @Bean
     public JpaVendorAdapter jpaVendorAdapter(){
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.MYSQL);
@@ -75,7 +76,7 @@ import java.util.Properties;
         return properties;
     }
 
-    @Bean
+    @Bean(name = "transactionManager")
     @Autowired
     public PlatformTransactionManager platformTransactionManager(EntityManagerFactory entityManagerFactory) {
         {
