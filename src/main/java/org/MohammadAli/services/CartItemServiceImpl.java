@@ -47,7 +47,7 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     @Transactional
-    public void remove(Long cartID) {
-        cartItemDAO.removeByCart_CartId(cartID);
+    public void remove(Long cartItem) {
+        cartItemDAO.removeCartItemByID(cartItem);
     }
 }

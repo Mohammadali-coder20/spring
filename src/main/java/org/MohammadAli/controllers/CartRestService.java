@@ -69,14 +69,23 @@ public class CartRestService {
         List<CartItemDTO.RETRIEVE> cartItems = customer.getCart().getCartItems();
 //        cartItemService.remove(customer.getCart().getCartId());
 
-        Iterator<CartItemDTO.RETRIEVE> iterator = cartItems.iterator();
+                Iterator<CartItemDTO.RETRIEVE> iterator = cartItems.iterator();
         while (iterator.hasNext()){
             CartItemDTO.RETRIEVE nextCartItem = iterator.next();
             if (nextCartItem.getProduct().getProductID() == productID){
-                cartService.removeCartItem(nextCartItem);
+                cartItemService.remove(nextCartItem.getCartItemID());
                 break;
             }
         }
+
+//        Iterator<CartItemDTO.RETRIEVE> iterator = cartItems.iterator();
+//        while (iterator.hasNext()){
+//            CartItemDTO.RETRIEVE nextCartItem = iterator.next();
+//            if (nextCartItem.getProduct().getProductID() == productID){
+//                cartService.removeCartItem(nextCartItem);
+//                break;
+//            }
+//        }
 
 
 

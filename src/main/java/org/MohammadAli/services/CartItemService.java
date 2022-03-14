@@ -16,5 +16,5 @@ public interface CartItemService {
 
     void update(CartItemDTO cartItemDTO);
 
-    void remove(Long cartID);
+    void remove(Long cartItemID);
 }
