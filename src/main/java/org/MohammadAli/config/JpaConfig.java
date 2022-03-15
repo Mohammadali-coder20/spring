@@ -76,8 +76,8 @@ import java.util.Properties;
         return properties;
     }
 
-    @Bean(name = "transactionManager")
     @Autowired
+    @Bean(name = "transactionManager")
     public PlatformTransactionManager platformTransactionManager(EntityManagerFactory entityManagerFactory) {
         {
             JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();

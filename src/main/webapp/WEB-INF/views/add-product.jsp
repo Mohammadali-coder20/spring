@@ -39,8 +39,7 @@
                 <div class="form-group has-success">
                     <label class="col-xs-3 control-label" for="productName">Product Name :</label>
                     <div class="col-xs-9">
-                        <form:input path="productName" class="form-control" placeholder="Enter Product Name"
-                                    id="productName"/>
+                        <form:input path="productName" class="form-control" placeholder="Enter Product Name" id="productName"/>
                     </div>
                 </div>
 
@@ -73,8 +72,7 @@
                 <div class="form-group has-success">
                     <label class="col-xs-3 control-label" for="productModel">Product Model :</label>
                     <div class="col-xs-9">
-                        <form:input path="productModel" class="form-control" placeholder="Enter Product model"
-                                    id="productModel"/>
+                        <form:input path="productModel" class="form-control" placeholder="Enter Product model" id="productModel"/>
                     </div>
                 </div>
 
@@ -107,8 +105,7 @@
                 <div class="form-group has-success">
                     <label class="col-xs-3 control-label" for="unitInStock">Product Stock :</label>
                     <div class="col-xs-9">
-                        <form:input path="unitInStock" class="form-control" placeholder="Enter Product Unit in Stock"
-                                    id="unitInStock"/>
+                        <form:input path="unitInStock" class="form-control" placeholder="Enter Product Unit in Stock" id="unitInStock"/>
                     </div>
                 </div>
 

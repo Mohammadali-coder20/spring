@@ -12,6 +12,7 @@ import org.MohammadAli.services.CustomerOrderService;
 import org.MohammadAli.services.CustomerService;
 import org.MohammadAli.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +35,11 @@ public class AdminController {
 
 
     @GetMapping("/product-management/{pageNumber}")
-    public String productManagement(@PathVariable Integer pageNumber, Model model) {
-
-        List<ProductDTO.RETRIEVE> productDTOList = productService.findAll();
+    public String productManagement(@PathVariable("pageNumber") Integer pageNumber , Model model) {
+        List<ProductDTO.RETRIEVE> productDTOList = productService.findAll(pageNumber);
         model.addAttribute("products", productDTOList);
+        model.addAttribute("totalPages", 10);
+        model.addAttribute("currentPageNumber", pageNumber);
         return "product-inventory";
     }
 
@@ -60,8 +62,8 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/customer-message/{pageIndex}", method = RequestMethod.GET)
-    public String customerMessage(@PathVariable Integer pageIndex, Model model) {
+    @RequestMapping(value = "/customer-message/{pageNumber}", method = RequestMethod.GET)
+    public String customerMessage(@PathVariable Integer pageNumber, Model model) {
         List<CustomerContactDTO.RETRIEVE> all = customerContactService.findAll();
         if (all.size() != 0)
             model.addAttribute("customerContacts", all);
@@ -69,6 +71,7 @@ public class AdminController {
             model.addAttribute("msg", "There are no messages from any users");
         return "customer-message";
     }
+
 
 
 }

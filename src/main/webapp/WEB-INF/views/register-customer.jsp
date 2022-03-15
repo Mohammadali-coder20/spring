@@ -7,7 +7,7 @@
 
     <div class="container">
    
-  
+
 
 	   <div class="page-header title">
 	              <h1>Register Customer</h1>

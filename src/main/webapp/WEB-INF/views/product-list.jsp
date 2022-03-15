@@ -25,7 +25,7 @@
 		                        <a href="<c:url  value="/product/product-list/Desktop/1"/>" class="list-group-item">Desktop </a>
 		                        <a href="<c:url  value="/product/product-list/Washing Machine/1"/>" class="list-group-item">Washing Machine </a>
 	                            <a href="<c:url  value="/product/product-list/ipad/1"/>" class="list-group-item">ipad </a>
-	                            <a href="<c:url  value="/product/product-list/Game console/1"/>" class="list-group-item">Geaming console </a>
+	                            <a href="<c:url  value="/product/product-list/Game console/1"/>" class="list-group-item">Gaming console </a>
 		                        
 		                  </div>
 		          </div>
@@ -147,9 +147,6 @@
 	            <c:when test="${currentPageNumber == 1}">
 	                <li class="disabled"><a href="#">&lt;&lt;</a></li>
 	                <li class="disabled"><a href="#">&lt;</a></li>
-	            
-	            
-	            
 	            </c:when>
 	            <c:otherwise>
 	                <li><a href="${firstUrl}">&lt;&lt;</a></li>

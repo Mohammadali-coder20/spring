@@ -1,10 +1,11 @@
 
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="/WEB-INF/views/template/header.jsp" %>
-<c:url var="firstUrl" value="/admin/productManagement/1" />
-<c:url var="lastUrl" value="/admin/productManagement/${totalPages}" />
-<c:url var="prevUrl" value="/admin/productManagement/${currentPageNumber - 1}" />
-<c:url var="nextUrl" value="/admin/productManagement/${currentPageNumber + 1}" />
+<c:url var="firstUrl" value="/admin/product-management/1" />
+<c:url var="lastUrl" value="/admin/product-management/${totalPages}" />
+<c:url var="prevUrl" value="/admin/product-management/${currentPageNumber - 1}" />
+<c:url var="nextUrl" value="/admin/product-management/${currentPageNumber + 1}" />
 	<div class="container-wrapper">
 
 		<div class="container">
@@ -32,6 +33,11 @@
 					        <label  for="inputEmail">Search more product  :</label>
 					        <input type="text" name="searchTerm" class="form-control" style="width:300px"  id="inputEmail" placeholder="Enter Brand , model or  category name">
 					    </div>
+<%--                        <form:form>--%>
+<%--                            <form:select path="product" >--%>
+
+<%--                            </form:select>--%>
+<%--                        </form:form>--%>
 					    <input type="hidden"  value="category" name="search">
 					    <button type="submit" class="btn btn-primary">Search Product</button>
                     </form>
@@ -85,9 +91,6 @@
             <c:when test="${currentPageNumber == 1}">
                 <li class="disabled"><a href="#">&lt;&lt;</a></li>
                 <li class="disabled"><a href="#">&lt;</a></li>
-            
-            
-            
             </c:when>
             <c:otherwise>
                 <li><a href="${firstUrl}">&lt;&lt;</a></li>
@@ -95,7 +98,7 @@
             </c:otherwise>
         </c:choose>
         <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
-            <c:url var="pageUrl" value="/admin/productManagement/${i}" />
+            <c:url var="pageUrl" value="/admin/product-management/${i}" />
             <c:choose>
                 <c:when test="${i == currentPageNumber}">
                     <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>
