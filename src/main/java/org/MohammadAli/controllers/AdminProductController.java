@@ -1,6 +1,7 @@
 package org.MohammadAli.controllers;
 
 import lombok.AllArgsConstructor;
+import org.MohammadAli.models.Pagination;
 import org.MohammadAli.models.ProductDTO;
 import org.MohammadAli.services.ProductService;
 import org.springframework.data.domain.PageRequest;
@@ -43,12 +44,12 @@ public class AdminProductController {
     }
 
     @GetMapping("/search-product/{pageNumber}")
-    public String searchProduct(@RequestParam("searchTerm") String searchTerm, @PathVariable("pageNumber") int pageNumber ,String category, Model model) {
+    public String searchProduct(@RequestParam("searchTerm") String searchTerm, @PathVariable("pageNumber") int pageNumber , String category, Pagination<ProductDTO.RETRIEVE> pagination , Model model) {
         List<ProductDTO.RETRIEVE> productList;
         if (searchTerm.equals(""))
-            productList = productService.findAll(pageNumber);
+            productList = productService.findAll(pageNumber , pagination);
         else
-            productList = productService.findProductByBrandOrModel(searchTerm, category , pageNumber );
+            productList = productService.findProductByBrandOrModel(searchTerm, category , pageNumber , pagination );
         model.addAttribute("products", productList);
         return "product-inventory";
     }

@@ -1,6 +1,9 @@
 package org.MohammadAli.config;
 
+import org.MohammadAli.data.entities.Product;
 import org.MohammadAli.models.CustomerDTO;
+import org.MohammadAli.models.Pagination;
+import org.MohammadAli.models.ProductDTO;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.InjectionPoint;
@@ -26,6 +29,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.jsp.tagext.ValidationMessage;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Configuration
@@ -99,6 +103,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public List<CustomerDTO.RETRIEVE> getList(){
         return new ArrayList<>();
+    }
+
+    @Bean
+    public Pagination<ProductDTO.RETRIEVE> getPagePagination(){
+        return new Pagination<>(ArrayList<ProductDTO.RETRIEVE>::new);
     }
 
 

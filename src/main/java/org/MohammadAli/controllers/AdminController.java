@@ -3,10 +3,7 @@ package org.MohammadAli.controllers;
 import java.util.*;
 
 import lombok.AllArgsConstructor;
-import org.MohammadAli.models.CustomerContactDTO;
-import org.MohammadAli.models.CustomerDTO;
-import org.MohammadAli.models.CustomerOrderDTO;
-import org.MohammadAli.models.ProductDTO;
+import org.MohammadAli.models.*;
 import org.MohammadAli.services.CustomerContactService;
 import org.MohammadAli.services.CustomerOrderService;
 import org.MohammadAli.services.CustomerService;
@@ -22,10 +19,15 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class AdminController {
 
+    @Autowired
     private ProductService productService;
     private CustomerService customerService;
     private CustomerOrderService customerOrderService;
     private CustomerContactService customerContactService;
+
+
+    @Autowired
+    Pagination<ProductDTO.RETRIEVE> pagination;
 
 
     @GetMapping("/admin-panel")
@@ -35,10 +37,12 @@ public class AdminController {
 
 
     @GetMapping("/product-management/{pageNumber}")
-    public String productManagement(@PathVariable("pageNumber") Integer pageNumber , Model model) {
-        List<ProductDTO.RETRIEVE> productDTOList = productService.findAll(pageNumber);
-        model.addAttribute("products", productDTOList);
-        model.addAttribute("totalPages", 10);
+    public String productManagement(@PathVariable("pageNumber") Integer pageNumber, @Autowired Pagination<ProductDTO.RETRIEVE> pagination, Model model) {
+        List<ProductDTO.RETRIEVE> all = productService.findAll(pageNumber-1, pagination);
+        model.addAttribute("products", all);
+        model.addAttribute("beginIndex", Math.max(1, pageNumber - 6));
+        model.addAttribute("endIndex", Math.min(pageNumber + 10, pagination.getTotalPages()));
+        model.addAttribute("totalPages", pagination.getTotalPages());
         model.addAttribute("currentPageNumber", pageNumber);
         return "product-inventory";
     }
@@ -71,7 +75,6 @@ public class AdminController {
             model.addAttribute("msg", "There are no messages from any users");
         return "customer-message";
     }
-
 
 
 }

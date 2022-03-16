@@ -3,10 +3,9 @@ package org.MohammadAli.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import org.MohammadAli.models.Pagination;
 import org.MohammadAli.models.ProductDTO;
 import org.MohammadAli.services.ProductService;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +24,14 @@ public class ProductController {
     @GetMapping("/product-list/{category}/{pageNumber}")
     public String showAllProductByCategory(
               @PathVariable("category") String category
-            , @RequestParam("pageNumber") int pageNumber
+            , @PathVariable("pageNumber") int pageNumber
+            ,  Pagination<ProductDTO.RETRIEVE> pagination
             , Model model) {
 
         List<ProductDTO.RETRIEVE> productList;
 //        PageRequest pageRequest = (category.equals("all")) ? PageRequest.of(page, size) : PageRequest.of(page, size, Sort.by("productName")) ;
         if (category.equals("all"))
-            productList = productService.findAll(pageNumber);
+            productList = productService.findAll(pageNumber , pagination);
         else
             productList = productService.findProductByCategory(category, pageNumber);
         model.addAttribute("totalPages", 10);
