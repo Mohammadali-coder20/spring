@@ -7,8 +7,6 @@ import org.MohammadAli.models.ProductDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +27,6 @@ public class ProductServiceImpl implements ProductService {
     ModelMapper modelMapper;
 
 
-
     @Override
     public void save(ProductDTO.CREATE productDTO) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
@@ -38,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO.RETRIEVE> findAll(Integer pageNumber , Pagination<ProductDTO.RETRIEVE> pagination) {
+    public List<ProductDTO.RETRIEVE> findAll(Integer pageNumber, Pagination<ProductDTO.RETRIEVE> pagination) {
         Pageable pageable = Pagination.createPage(pageNumber, Pagination.PAGE_ELEMENT_SIZE);
         Page<Product> productList = productDAO.findAll(pageable);
         pagination.setTotalPages(productList.getTotalPages());
@@ -65,9 +62,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO.RETRIEVE> findProductByCategory(String category, int pageNumber) {
+    public List<ProductDTO.RETRIEVE> findProductByCategory(String category, int pageNumber, Pagination<ProductDTO.RETRIEVE> pagination) {
         Pageable pageable = Pagination.createPage(pageNumber, Pagination.PAGE_ELEMENT_SIZE);
         Page<Product> productList = productDAO.findAllByProductCategory(category, pageable);
+        pagination.setTotalPages(productList.getTotalPages());
         return productList.stream().map(product -> modelMapper.map(product, ProductDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
@@ -77,9 +75,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO.RETRIEVE> findProductByBrandOrModel(String searchTerm, String category, int pageNumber , Pagination<ProductDTO.RETRIEVE> pagination) {
-        Pageable pageable =  Pagination.createPage(pageNumber , Pagination.PAGE_ELEMENT_SIZE);
-        Page<Product> productList = productDAO.findProductByBrandOrModel(searchTerm, category , pageable);
+    public List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrNameAndCategory(String searchTerm, String category, int pageNumber, Pagination<ProductDTO.RETRIEVE> pagination) {
+        Pageable pageable = Pagination.createPage(pageNumber, Pagination.PAGE_ELEMENT_SIZE);
+        Page<Product> productList = productDAO.findProductByModelOrBrandOrNameAndCategory(searchTerm, category, pageable);
         pagination.setTotalPages(productList.getTotalPages());
         return productList.stream().map(product -> modelMapper.map(product, ProductDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
@@ -89,6 +87,8 @@ public class ProductServiceImpl implements ProductService {
         Product product = modelMapper.map(createDTO, Product.class);
         product.setProductID(productID);
         product.setImg(createDTO.getProductImg().getBytes());
+        if(product.getImg().length == 0)
+            product.setImg(productDAO.retrieveProductImgByID(productID));
         productDAO.save(product);
     }
 }

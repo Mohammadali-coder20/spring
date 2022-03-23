@@ -6,6 +6,7 @@ import lombok.extern.log4j.Log4j;
 import org.MohammadAli.models.Pagination;
 import org.MohammadAli.models.ProductDTO;
 import org.MohammadAli.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,20 +26,23 @@ public class ProductController {
     public String showAllProductByCategory(
               @PathVariable("category") String category
             , @PathVariable("pageNumber") int pageNumber
-            ,  Pagination<ProductDTO.RETRIEVE> pagination
+            , @Autowired Pagination<ProductDTO.RETRIEVE> pagination
             , Model model) {
 
         List<ProductDTO.RETRIEVE> productList;
-//        PageRequest pageRequest = (category.equals("all")) ? PageRequest.of(page, size) : PageRequest.of(page, size, Sort.by("productName")) ;
+
         if (category.equals("all"))
-            productList = productService.findAll(pageNumber , pagination);
+            productList = productService.findAll(pageNumber - 1 , pagination);
         else
-            productList = productService.findProductByCategory(category, pageNumber);
-        model.addAttribute("totalPages", 10);
-        model.addAttribute("currentPageNumber", 10);
-        model.addAttribute("productCategory", category);
+            productList = productService.findProductByCategory(category, pageNumber - 1 , pagination);
+        model.addAttribute("beginIndex", Math.max(1, pageNumber - 5));
+        model.addAttribute("endIndex", Math.min(pageNumber + 10, pagination.getTotalPages()));
+        model.addAttribute("totalPages", pagination.getTotalPages());
+        model.addAttribute("currentPageNumber", pageNumber);
+        model.addAttribute("productCategory", (category.equals("all") ? "all" : category));
         model.addAttribute("products", productList);
         return "product-list";
+        //        PageRequest pageRequest = (category.equals("all")) ? PageRequest.of(page, size) : PageRequest.of(page, size, Sort.by("productName")) ;
     }
 
     @GetMapping("/view-product-detail/{productID}")

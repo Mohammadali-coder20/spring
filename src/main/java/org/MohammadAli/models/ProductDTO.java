@@ -1,16 +1,12 @@
 package org.MohammadAli.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import javax.persistence.Lob;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -77,6 +73,9 @@ public class ProductDTO {
             categoryList.put("Laptop","Laptop");
             categoryList.put("Mobile","Mobile");
             categoryList.put("TV","TV");
+            categoryList.put("Gaming","Gaming");
+            categoryList.put("Mobile Accessory","Mobile Accessory");
+            categoryList.put("House","House");
         }
     }
 
@@ -105,6 +104,9 @@ public class ProductDTO {
             categoryList.put("Laptop","Laptop");
             categoryList.put("Mobile","Mobile");
             categoryList.put("TV","TV");
+            categoryList.put("Gaming","Gaming");
+            categoryList.put("Mobile Accessory","Mobile Accessory");
+            categoryList.put("House","House");
         }
 
     }

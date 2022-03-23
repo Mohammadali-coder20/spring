@@ -62,7 +62,7 @@
                         </a></li>
                         <li class=""><a href="#">Green Online Shop</a></li>
                         <li><a href="<c:url value="/" />"><spring:message code="home.page"/></a></li>
-                        <li><a href="<c:url value="/product/product-list/all?page=0&size=20" />"><spring:message code="product.page"/></a></li>
+                        <li><a href="<c:url value="/product/product-list/all/1" />"><spring:message code="product.page"/></a></li>
                         <li><a href="<c:url value="/about" />"><spring:message code="about.page"/></a></li>
                         <li><a href="<c:url value="/contact" />"><spring:message code="contact.page"/></a></li>
 

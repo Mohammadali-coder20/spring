@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.MohammadAli.models.Pagination;
 import org.MohammadAli.models.ProductDTO;
 import org.MohammadAli.services.ProductService;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +23,7 @@ public class AdminProductController {
 
     @GetMapping("/add-product")
     public String addProduct(@ModelAttribute("product") ProductDTO.CREATE createDTO, @RequestParam(value = "update", required = false) String update) {
-        if (update != null) {
-
-        } else
+        if (update == null)
             createDTO.setProductStatus("Brand New");
         return "add-product";
     }
@@ -44,12 +41,19 @@ public class AdminProductController {
     }
 
     @GetMapping("/search-product/{pageNumber}")
-    public String searchProduct(@RequestParam("searchTerm") String searchTerm, @PathVariable("pageNumber") int pageNumber , String category, Pagination<ProductDTO.RETRIEVE> pagination , Model model) {
+    public String searchProduct(
+              @RequestParam("searchTerm") String searchTerm
+            , @PathVariable("pageNumber") int pageNumber
+            , @RequestParam("category") String category
+            , Pagination<ProductDTO.RETRIEVE> pagination
+            , Model model) {
+
         List<ProductDTO.RETRIEVE> productList;
-        if (searchTerm.equals(""))
-            productList = productService.findAll(pageNumber , pagination);
+
+        if (searchTerm.equals("") /*|| category.equalsIgnoreCase("all")*/)
+            productList = productService.findAll(pageNumber - 1, pagination);
         else
-            productList = productService.findProductByBrandOrModel(searchTerm, category , pageNumber , pagination );
+            productList = productService.findProductByBrandOrModelOrNameAndCategory(searchTerm, category, pageNumber - 1, pagination);
         model.addAttribute("products", productList);
         return "product-inventory";
     }

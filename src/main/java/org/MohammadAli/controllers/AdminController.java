@@ -40,7 +40,7 @@ public class AdminController {
     public String productManagement(@PathVariable("pageNumber") Integer pageNumber, @Autowired Pagination<ProductDTO.RETRIEVE> pagination, Model model) {
         List<ProductDTO.RETRIEVE> all = productService.findAll(pageNumber-1, pagination);
         model.addAttribute("products", all);
-        model.addAttribute("beginIndex", Math.max(1, pageNumber - 6));
+        model.addAttribute("beginIndex", Math.max(1, pageNumber - 5));
         model.addAttribute("endIndex", Math.min(pageNumber + 10, pagination.getTotalPages()));
         model.addAttribute("totalPages", pagination.getTotalPages());
         model.addAttribute("currentPageNumber", pageNumber);

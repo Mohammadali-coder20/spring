@@ -1,10 +1,10 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@include file="/WEB-INF/views/template/header.jsp" %>
 
-<c:url var="firstUrl" value="/product/productList/${productCategory}/1" />
-<c:url var="lastUrl" value="/product/productList/${productCategory}/${totalPages}" />
-<c:url var="prevUrl" value="/product/productList/${productCategory}/${currentPageNumber - 1}" />
-<c:url var="nextUrl" value="/product/productList/${productCategory}/${currentPageNumber + 1}" />
+<c:url var="firstUrl" value="/product/product-list/${productCategory}/1" />
+<c:url var="lastUrl" value="/product/product-list/${productCategory}/${totalPages}" />
+<c:url var="prevUrl" value="/product/product-list/${productCategory}/${currentPageNumber - 1}" />
+<c:url var="nextUrl" value="/product/product-list/${productCategory}/${currentPageNumber + 1}" />
 
  <div class="container-wrapper">
  

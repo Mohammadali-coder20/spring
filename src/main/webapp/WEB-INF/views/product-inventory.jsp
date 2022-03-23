@@ -33,13 +33,22 @@
 					        <label  for="inputEmail">Search more product  :</label>
 					        <input type="text" name="searchTerm" class="form-control" style="width:300px"  id="inputEmail" placeholder="Enter Brand , model or  category name">
 					    </div>
+                        <div style="position: relative; left: 530px; top: 6px; float: left;">
+                            <select name="category">
+                                <option>Laptop</option>
+                                <option>Mobile</option>
+                                <option>TV</option>
+                            </select>
+                        </div>
 <%--                        <form:form>--%>
 <%--                            <form:select path="product" >--%>
 
 <%--                            </form:select>--%>
 <%--                        </form:form>--%>
 					    <input type="hidden"  value="category" name="search">
-					    <button type="submit" class="btn btn-primary">Search Product</button>
+					    <div style="position: relative; top: -35px; left: 605px;">
+                            <button type="submit" class="btn btn-primary">Search Product</button>
+                        </div>
                     </form>
 		               
 		         </div>

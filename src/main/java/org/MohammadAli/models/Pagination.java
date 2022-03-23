@@ -20,7 +20,7 @@ public class Pagination<T> {
 
     private int  totalPages;
 
-    public static final int PAGE_ELEMENT_SIZE = 5;
+    public static final int PAGE_ELEMENT_SIZE = 6;
 
     public <E extends Collection<T>> Pagination(Supplier<E> collectionProducer){
         this.pageElements = collectionProducer.get();
