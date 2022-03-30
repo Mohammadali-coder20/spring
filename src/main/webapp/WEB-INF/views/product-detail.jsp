@@ -29,10 +29,10 @@
                     <br/>
 
 
-                    <c:set var="url" scope="page" value="/product/product-list/${product.productCategory}/1"/>
+                    <c:set var="url" scope="page" value="/product/product-list/${product.productCategory}/${previousPage}"/>
 
                     <c:if test="${pageContext.request.userPrincipal.name=='admin'}">
-                        <c:set var="url" scope="page" value="/admin/product-management/1"/>
+                        <c:set var="url" scope="page" value="/admin/product-management/${previousPage}"/>
                     </c:if>
 
                     <p ng-controller="cartCtrl">

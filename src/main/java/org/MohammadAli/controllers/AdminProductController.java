@@ -28,16 +28,15 @@ public class AdminProductController {
         return "add-product";
     }
 
-    @PostMapping("/save-product")
-    public String saveProduct(@Valid @ModelAttribute("product") ProductDTO.CREATE createDTO, BindingResult result, Long productID) throws IOException {
-
+    @PostMapping("/save-product/{pageNumber}")
+    public String saveProduct(@Valid @ModelAttribute("product") ProductDTO.CREATE createDTO,@PathVariable("pageNumber") String pageNumber ,BindingResult result, Long productID) throws IOException {
         if (result.hasErrors())
             return "add-product";
         if (productID != null)
             productService.update(createDTO, productID);
         else
             productService.save(createDTO);
-        return "redirect:/admin/product-management/1";
+        return "redirect:/admin/product-management/"+pageNumber;
     }
 
     @GetMapping("/search-product/{pageNumber}")
@@ -55,29 +54,25 @@ public class AdminProductController {
         else
             productList = productService.findProductByBrandOrModelOrNameAndCategory(searchTerm, category, pageNumber - 1, pagination);
         model.addAttribute("products", productList);
+        model.addAttribute("search", "search");
         return "product-inventory";
     }
 
-    @RequestMapping(value = "/delete-product/{productID}", method = RequestMethod.POST)
-    public String deleteProduct(@PathVariable("productID") Long productID) {
+    @RequestMapping(value = "/delete-product/{pageNumber}/{productID}", method = RequestMethod.GET)
+    public String deleteProduct(@PathVariable("productID") Long productID ,@PathVariable("pageNumber") String pageNumber) {
+        String previousPage = pageNumber.substring(12);
         productService.remove(productID);
-        return "redirect:/admin/product-management/1";
+        return "redirect:/admin/product-management/"+previousPage;
     }
 
-    @RequestMapping(value = "/update-product/{productID}", method = RequestMethod.GET)
-    public String findProductForUpdateProduct(@PathVariable("productID") Long productID, Model model) {
+    @RequestMapping(value = "/update-product/{pageNumber}/{productID}", method = RequestMethod.GET)
+    public String findProductForUpdateProduct(@PathVariable("productID") Long productID,@PathVariable("pageNumber") String pageNumber , Model model) {
+        String previousPage = pageNumber.substring(12);
         ProductDTO.RETRIEVE productByID = productService.findProductByID(productID);
         productByID.init();
         model.addAttribute("product", productByID);
         model.addAttribute("update", "update");
+        model.addAttribute("previousPage",previousPage);
         return "add-product";
     }
-
-    @RequestMapping(value = "/delete-product/{productID}")
-    public String removeProduct(@PathVariable("productID") Long productID) {
-        productService.remove(productID);
-        return "redirect:/admin/product-management/1";
-    }
-
-
 }

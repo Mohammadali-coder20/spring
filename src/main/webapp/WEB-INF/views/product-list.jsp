@@ -115,7 +115,7 @@
                  <h2>${product.productModel}</h2>
                  <h3>${product.productPrice} USD</h3>
                
-                 <a  href=" <c:url  value="/product/view-product-detail/${product.productID}"/>" class="btn btn-info btn-lg">View Detail</a>
+                 <a  href=" <c:url  value="/product/view-product-detail/pageNumber: ${currentPageNumber}/${product.productID}"/>" class="btn btn-info btn-lg">View Detail</a>
                 
              </div>
              </div>

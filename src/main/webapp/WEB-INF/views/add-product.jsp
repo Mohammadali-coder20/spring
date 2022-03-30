@@ -26,7 +26,7 @@
 
         <div class="form-layout">
             <form:form
-                    action="${pageContext.request.contextPath}/admin/product/save-product?${_csrf.parameterName}=${_csrf.token}"
+                    action="${pageContext.request.contextPath}/admin/product/save-product/${previousPage}?${_csrf.parameterName}=${_csrf.token}"
                     method="post" modelAttribute="product" enctype="multipart/form-data" class="form-horizontal">
                 <div class="row">
                     <label class="col-xs-3 control-label"></label>
@@ -213,7 +213,7 @@
                                 <input type="submit" value="Submit" class="btn btn-default"/>
                             </c:otherwise>
                         </c:choose>
-                        <a href="<c:url value="/admin/product-management/1" />" class="btn btn-default">Cancel</a>
+                        <a href="<c:url value="/admin/product-management/${previousPage}" />" class="btn btn-default">Cancel</a>
                     </div>
                 </div>
 

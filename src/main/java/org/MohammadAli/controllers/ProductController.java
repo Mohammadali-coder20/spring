@@ -45,10 +45,12 @@ public class ProductController {
         //        PageRequest pageRequest = (category.equals("all")) ? PageRequest.of(page, size) : PageRequest.of(page, size, Sort.by("productName")) ;
     }
 
-    @GetMapping("/view-product-detail/{productID}")
-    public String showProductDetail(@PathVariable("productID") long productID, Model model) {
+    @GetMapping("/view-product-detail/{pageNumber}/{productID}")
+    public String showProductDetail(@PathVariable("productID") long productID,@PathVariable("pageNumber") String pageNumber , Model model) {
+        String previousPage = pageNumber.split("\\s")[1];
         ProductDTO.RETRIEVE dto = productService.findProductByID(productID);
         model.addAttribute("product", dto);
+        model.addAttribute("previousPage", previousPage);
         return "product-detail";
     }
 }
