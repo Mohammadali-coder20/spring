@@ -57,11 +57,39 @@ public class ProductDTO {
     @NotEmpty
     private String productCategory;
 
+    public enum ProductCategory{
+
+        LAPTOP("Laptop","Laptop"),
+        MOBILE("2","Mobile"),
+        TV("3","Tv"),
+        CAMERA("4","Camera"),
+        REFRIGERATOR("5", "Refrigerator"),
+        TABLET("6", "Tablet"),
+        MICROOVEN("7","MicroOven"),
+        ROUTER("8","Router"),
+        GAMING("9","GAMING"),
+        DVDPLAYER("10","DvdPlayer"),
+        FAN("11","Fan"),
+        PRINTER("12","Printer"),
+        DESKTOP("13","Desktop"),
+        HOME("HOME","HOME");
+
+
+        private String key;
+        private String value;
+
+        ProductCategory(String key , String value){
+            this.key = key;
+            this.value = value;
+        }
+    }
+
 
 
     @Setter
     @Getter
     public static class CREATE extends ProductDTO{
+
 
         private Map<String,String> categoryList;
 

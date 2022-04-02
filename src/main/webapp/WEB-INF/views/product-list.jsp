@@ -24,8 +24,7 @@
 		                        <a href="<c:url  value="/product/product-list/Printer/1"/>" class="list-group-item">Printer</a>
 		                        <a href="<c:url  value="/product/product-list/Desktop/1"/>" class="list-group-item">Desktop </a>
 		                        <a href="<c:url  value="/product/product-list/Washing Machine/1"/>" class="list-group-item">Washing Machine </a>
-	                            <a href="<c:url  value="/product/product-list/ipad/1"/>" class="list-group-item">ipad </a>
-	                            <a href="<c:url  value="/product/product-list/Game console/1"/>" class="list-group-item">Gaming console </a>
+	                            <a href="<c:url  value="/product/product-list/Game Console/1"/>" class="list-group-item">Gaming console </a>
 		                        
 		                  </div>
 		          </div>
@@ -45,7 +44,6 @@
 		                        <a href="<c:url  value="/product/product-list/Tv/1"/>" class="list-group-item">Tv </a>
 		                        <a href="<c:url  value="/product/product-list/Refrigerator/1"/>" class="list-group-item">Refrigerator </a>
 		                        <a href="<c:url  value="/product/product-list/Tablet/1"/>" class="list-group-item">Tablet </a>
-		                        <a href="<c:url  value="/product/product-list/MicroOven/1"/>" class="list-group-item">Micro Oven </a>
 		                        <a href="<c:url  value="/product/product-list/Router/1"/>" class="list-group-item">Router </a>
 		                        
 		                  </div>

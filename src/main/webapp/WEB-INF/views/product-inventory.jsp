@@ -34,11 +34,11 @@
                                    id="inputEmail" placeholder="Enter Brand , model or  category name">
                         </div>
                         <div style="position: relative; left: 530px; top: 6px; float: left;">
-                            <select name="category">
-                                <option>Laptop</option>
-                                <option>Mobile</option>
-                                <option>TV</option>
-                            </select>
+<%--                            <select name="category">--%>
+<%--                                <option>Laptop</option>--%>
+<%--                                <option>Mobile</option>--%>
+<%--                                <option>TV</option>--%>
+<%--                            </select>--%>
                         </div>
                         <%--                        <form:form>--%>
                         <%--                            <form:select path="product" >--%>
