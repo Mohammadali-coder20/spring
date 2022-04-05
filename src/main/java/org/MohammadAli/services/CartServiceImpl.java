@@ -5,7 +5,6 @@ import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.CartItem;
 import org.MohammadAli.models.CartDTO;
 import org.MohammadAli.models.CartItemDTO;
-import org.MohammadAli.models.CustomerDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
 
 
     @Autowired
@@ -28,39 +27,73 @@ public class CartServiceImpl implements CartService{
     @Override
     @Transactional
     public CartDTO.RETRIEVE findCartByID(Long cartID) {
-        Cart cart = (Cart) cartDAO.findById(cartID).get();
-        return mapper.map(cart , CartDTO.RETRIEVE.class);
+        Cart cart = cartDAO.findById(cartID).get();
+        return mapper.map(cart, CartDTO.RETRIEVE.class);
     }
 
     @Override
+    @Transactional
     public void save(CartDTO.CREATE cartDTO) throws IOException {
-        Cart cart =  mapper.map(cartDTO ,Cart.class);
+        Cart cart = mapper.map(cartDTO, Cart.class);
         cartDAO.save(cart);
         cartDTO.setCartId(cart.getCartId());
     }
 
     @Override
+    @Transactional
     public List<CartDTO.RETRIEVE> findAll() {
         return null;
     }
 
     @Override
+    @Transactional
     public void delete(CartDTO.DELETE deleteDTO) {
 
     }
 
     @Override
+    @Transactional
     public void update(CartDTO.RETRIEVE cart) {
-        cartDAO.save(mapper.map(cart , Cart.class));
+        cartDAO.save(mapper.map(cart, Cart.class));
     }
 
     @Override
+    @Transactional
     public void removeCartItem(CartItemDTO.RETRIEVE nextCartItem) {
-        cartDAO.removeCartItem(mapper.map(nextCartItem , CartItem.class).getCartItemID());
+        cartDAO.removeCartItem(mapper.map(nextCartItem, CartItem.class).getCartItemID());
     }
 
     @Override
-    public void clearCartItems(Long cartID) {
-        cartDAO.clearCartItem(cartID);
+    @Transactional
+    public void clearCart(Long cartID) {
+        cartDAO.clearCart(cartID);
     }
+
+    @Override
+    @Transactional
+    public CartDTO.RETRIEVE findCartByIDAndMakeItReadyToCheckout(long cartID) {
+        CartDTO.RETRIEVE cartByID = findCartByID(cartID);
+        cartByID.setGrandTotal(calculateCartGrandTotal(cartByID));
+        return cartByID;
+    }
+
+    @Transactional
+    public Cart validateCustomerCart(Long cartID) throws IOException {
+        Cart cart = cartDAO.findById(cartID).orElseThrow(() -> new IOException("no such cart is existed"));
+        if (cart.getCartItems().size() == -0) throw new IOException("cart with'" + cartID + "'id have no items");
+        return cart;
+    }
+
+    @Transactional
+    public double calculateCartGrandTotal(CartDTO.RETRIEVE dto) {
+        List<CartItemDTO.RETRIEVE> cartItems = dto.getCartItems();
+        double grandTotal = 0D;
+        for (CartItemDTO.RETRIEVE cartItem : cartItems) {
+            grandTotal += cartItem.getTotalPrice();
+        }
+        cartDAO.calculateCartGrandTotal(grandTotal, dto.getCartId());
+        return grandTotal;
+    }
+
+
 }

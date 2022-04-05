@@ -28,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
+    @Transactional
     public void save(ProductDTO.CREATE productDTO) throws IOException {
         Product product = modelMapper.map(productDTO, Product.class);
         product.setImg(productDTO.getProductImg().getBytes());
@@ -35,6 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public List<ProductDTO.RETRIEVE> findAll(Integer pageNumber, Pagination<ProductDTO.RETRIEVE> pagination) {
         Pageable pageable = Pagination.createPage(pageNumber, Pagination.PAGE_ELEMENT_SIZE);
         Page<Product> productList = productDAO.findAll(pageable);
@@ -48,11 +50,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public byte[] retrieveProductImgByID(Long Id) {
         return productDAO.retrieveProductImgByID(Id);
     }
 
     @Override
+    @Transactional
     public ProductDTO.RETRIEVE findProductByID(long productID) {
 //        Product product = productDAO.findById(productID).get();
 //        Product product = productDAO.findById(productID).orElse(new Product());
@@ -62,6 +66,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public List<ProductDTO.RETRIEVE> findProductByCategory(String category, int pageNumber, Pagination<ProductDTO.RETRIEVE> pagination) {
         Pageable pageable = Pagination.createPage(pageNumber, Pagination.PAGE_ELEMENT_SIZE);
         Page<Product> productList = productDAO.findAllByProductCategory(category, pageable);
@@ -70,11 +75,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void remove(Long productID) {
         productDAO.deleteById(productID);
     }
 
     @Override
+    @Transactional
     public List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrNameAndCategory(String searchTerm, String category, int pageNumber, Pagination<ProductDTO.RETRIEVE> pagination) {
         Pageable pageable = Pagination.createPage(pageNumber, Pagination.PAGE_ELEMENT_SIZE);
         Page<Product> productList = productDAO.findProductByModelOrBrandOrNameAndCategory(searchTerm, category, pageable);
@@ -83,6 +90,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void update(ProductDTO.CREATE createDTO, Long productID) throws IOException {
         Product product = modelMapper.map(createDTO, Product.class);
         product.setProductID(productID);

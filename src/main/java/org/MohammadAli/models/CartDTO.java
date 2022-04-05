@@ -48,6 +48,8 @@ public class CartDTO {
         private Long cartId;
 //        @JsonIgnore
         private List<CartItemDTO.RETRIEVE> cartItems;
+        @JsonIgnore
+        private CustomerDTO.RETRIEVE customer;
 
     }
 

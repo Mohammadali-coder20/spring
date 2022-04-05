@@ -7,13 +7,15 @@ import org.MohammadAli.data.entities.Customer;
 import org.MohammadAli.data.entities.ShippingAddress;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 
 @Data
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-public class CustomerOrderDTO {
+public class CustomerOrderDTO implements Serializable {
 
     private ShippingAddress shippingAddress;
 
@@ -24,9 +26,9 @@ public class CustomerOrderDTO {
     @NoArgsConstructor
     public static class CREATE extends CustomerOrderDTO{
 
-        private CartDTO.CREATE cart;
+        private CartDTO.RETRIEVE cart;
 
-        private CustomerDTO.CREATE customer;
+        private CustomerDTO.RETRIEVE customer;
 
     }
 

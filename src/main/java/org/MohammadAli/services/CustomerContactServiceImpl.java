@@ -24,18 +24,21 @@ public class CustomerContactServiceImpl implements CustomerContactService{
     CustomerContactDAO contactDAO;
 
     @Override
+    @Transactional
     public void save(CustomerContactDTO.CREATE customerContactDTO) throws IOException {
         contactDAO.save(mapper.map(customerContactDTO , CustomerContact.class));
 
     }
 
     @Override
+    @Transactional
     public List<CustomerContactDTO.RETRIEVE> findAll() {
         List<CustomerContact> aLl = contactDAO.findAll();
         return aLl.stream().map(contactDAO -> mapper.map(contactDAO , CustomerContactDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public void delete(Long contactID) {
         contactDAO.deleteById(contactID);
     }

@@ -20,5 +20,7 @@ public interface CartService {
 
     void removeCartItem(CartItemDTO.RETRIEVE nextCartItem);
 
-    void clearCartItems(Long cartID);
+    void clearCart(Long cartID);
+
+    CartDTO.RETRIEVE findCartByIDAndMakeItReadyToCheckout(long cartID);
 }

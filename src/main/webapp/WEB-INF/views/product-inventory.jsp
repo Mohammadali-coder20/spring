@@ -130,7 +130,7 @@
                 </c:choose>
             </ul>
         </div>
-
+    </div>
         <script src="/resources/js/controller.js"/>
         </script>
 

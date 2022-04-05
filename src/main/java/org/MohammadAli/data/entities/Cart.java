@@ -24,7 +24,7 @@ public class Cart extends Audit implements Serializable {
 
     @OneToOne
     @JoinColumn(name = "customerId")
-    @JsonIgnore
+//    @JsonIgnore
     private Customer customer;
 
     @OneToMany( mappedBy = "cart",cascade = CascadeType.ALL,fetch = FetchType.EAGER , orphanRemoval = true)

@@ -23,18 +23,21 @@ public class UserServiceImpl implements UserService{
     ModelMapper mapper;
 
     @Override
+    @Transactional
     public void save(UserDTO.CREATE userDTO) throws IOException {
         Users user = mapper.map(userDTO,Users.class);
         userDAO.save(user);
     }
 
     @Override
+    @Transactional
     public List<UserDTO.RETRIEVE> findAll() {
         List<Users> all = userDAO.findAll();
         return all.stream().map(users -> mapper.map(users , UserDTO.RETRIEVE.class)).collect(Collectors.toList());
     }
 
     @Override
+    @Transactional
     public void delete(UserDTO.DELETE deleteDTO) {
         userDAO.deleteById(deleteDTO.getUserID());
     }

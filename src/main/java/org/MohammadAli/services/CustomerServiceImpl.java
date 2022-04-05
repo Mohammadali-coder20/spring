@@ -27,6 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
+    @Transactional
     public void addCustomer(CustomerDTO.CREATE customerDTO) {
         customerDTO.setPassword(encoder.encode(customerDTO.getPassword()));
         Customer mapCustomer = mapper.map(customerDTO, Customer.class);
@@ -36,6 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
+    @Transactional
     public List<CustomerDTO.LOGIN> getAllCustomerForLogin() {
 
         List<Customer> all = customerDAO.findAll();
@@ -46,23 +48,27 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public CustomerDTO.ADDRESS getCustomerByCustomerID(long customerId) {
         Customer one = customerDAO.findById(customerId).orElseGet(() -> new Customer(0L,"none", "none","none","none","none",true,null , null ,null));
         return mapper.map(one,CustomerDTO.ADDRESS.class);
     }
 
     @Override
+    @Transactional
     public CustomerDTO findCustomerByUserNameAndPassWord(String username, String password) {
         return null;
     }
 
     @Override
+    @Transactional
     public void updateCustomer(CustomerDTO.CREATE customerDTO) {
         Customer customer = mapper.map(customerDTO , Customer.class);
         customerDAO.save(customer);
     }
 
     @Override
+    @Transactional
     public List<CustomerDTO.RETRIEVE> findAll() {
         List<Customer> all = customerDAO.findAll();
 
@@ -73,12 +79,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public CustomerDTO.INFO getCustomerInfoByUsername(String username) {
         Customer customer = customerDAO.getCustomerByUserName(username);
         return mapper.map(customer , CustomerDTO.INFO.class);
     }
 
     @Override
+    @Transactional
     public CustomerDTO.RETRIEVE getCustomerCartAndCustomerIdByUsername(String username) {
        Customer customer =  customerDAO.getCustomerByUserName(username);
        return mapper.map(customer , CustomerDTO.RETRIEVE.class);

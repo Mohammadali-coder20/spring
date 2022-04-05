@@ -110,7 +110,7 @@ public class CartRestService {
 
     @RequestMapping(value = "/{cartID}", method = RequestMethod.DELETE)
     public void clearCart(@PathVariable("cartID") Long cartID){
-        cartService.clearCartItems(cartID);
+        cartService.clearCart(cartID);
     }
 
 
