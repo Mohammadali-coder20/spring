@@ -2,6 +2,7 @@ package org.MohammadAli.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,9 +23,8 @@ public class Cart extends Audit implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartId;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customerId")
-//    @JsonIgnore
     private Customer customer;
 
     @OneToMany( mappedBy = "cart",cascade = CascadeType.ALL,fetch = FetchType.EAGER , orphanRemoval = true)

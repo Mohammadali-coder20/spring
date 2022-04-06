@@ -7,9 +7,7 @@ import org.MohammadAli.models.*;
 import org.MohammadAli.services.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -124,7 +122,7 @@ public class CustomerRegisterController {
 
         autoLogin(customerDTO,request);
 
-        return "registerCustomerSuccess";
+        return "register-customer-success";
     }
 
 

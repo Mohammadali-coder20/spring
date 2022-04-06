@@ -19,10 +19,8 @@
                 <th>Phone</th>
                 <th>Username</th>
                 <th>Enabled</th>
-                <th>Orderdetails</th>
-                
+                <th>Order Details</th>
                 <th>Operation</th>
-                
             </tr>
             </thead>
             <c:forEach items="${orders}" var="order">
@@ -34,8 +32,8 @@
                     <td>${order.customer.userName}</td>
                     <td>${order.customer.enabled}</td>
                    
-                    <td><a class="btn btn-info" href=" <spring:url value="/admin/customerOrder/productList/${order.customerOrderID}"/>">See Receipt</a></td>
-                    <td><a class="btn btn-danger" href=" <spring:url value="/admin/customerOrder/deletOrder/${order.customerOrderID}"/>">Clear Order</a></td>
+                    <td><a class="btn btn-info" href=" <spring:url value="/admin/customer-order/show-list/${order.customerOrderID}"/>">See Receipt</a></td>
+                    <td><a class="btn btn-danger" href=" <spring:url value="/admin/customer-order/delete-order/${order.customerOrderID}"/>">Clear Order</a></td>
                     <c:set  var="sl" value="${sl+1}"/>
                 </tr>
             </c:forEach>

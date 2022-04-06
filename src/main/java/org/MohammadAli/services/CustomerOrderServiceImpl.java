@@ -6,6 +6,8 @@ import org.MohammadAli.data.CustomerOrderDAO;
 import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.Customer;
 import org.MohammadAli.data.entities.CustomerOrder;
+import org.MohammadAli.models.CartDTO;
+import org.MohammadAli.models.CustomerDTO;
 import org.MohammadAli.models.CustomerOrderDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +46,21 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
                 .collect(Collectors.toList());
     }
 
+
     @Override
     @Transactional
-    public void delete(CustomerOrderDTO.DELETE deleteDTO) {
-        customerOrderDAO.deleteById(deleteDTO.getCustomerOrderID());
+    public void deleteByID(Long cartID) {
+        customerOrderDAO.deleteById(cartID);
+    }
+
+    @Override
+    public CustomerOrderDTO.RETRIEVE findById(Long cartID) {
+        CustomerOrder order = customerOrderDAO.findById(cartID).orElseThrow(() -> new RuntimeException("Receipt not found"));
+        return mapper.map(order , CustomerOrderDTO.RETRIEVE.class);
     }
 
     @Transactional
-    public void addCustomerOrder(CustomerOrder order) {
+    public void addCustomerOrder(CustomerOrder order) throws IOException {
 
         Cart cart = order.getCart();
 
@@ -61,7 +70,11 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
         order.setShippingAddress(customer.getShippingAddress());
         customerOrderDAO.save(order);
 
-        cartService.clearCart(cart.getCartId());
-
+//        cartService.clearCart(cart.getCartId());
+        cartService.createNewCartForCustomer(customer.getCustomerID());
+//        CartDTO.CREATE newCustomerCart = new CartDTO.CREATE();
+//        newCustomerCart.setCustomer(new CustomerDTO.CREATE());
+//        newCustomerCart.getCustomer().setCustomerID(customer.getCustomerID());
+//        cartService.save(newCustomerCart);
     }
 }

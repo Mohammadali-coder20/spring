@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j
 public class OrderController  {
 
-    private CustomerOrderService orderService;
-
     private CartService cartService;
 
     @GetMapping("/{cartID}")
@@ -26,5 +24,7 @@ public class OrderController  {
 
         return "redirect:/checkout?cartId=" + cartID;
     }
+
+
 
 }

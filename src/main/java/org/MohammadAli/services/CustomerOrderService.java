@@ -12,6 +12,8 @@ public interface CustomerOrderService {
 
     List<CustomerOrderDTO.RETRIEVE> findAll();
 
-    void delete(CustomerOrderDTO.DELETE deleteDTO);
+    void deleteByID(Long cartID);
 
+    CustomerOrderDTO.RETRIEVE findById(Long cartID);
 }
+

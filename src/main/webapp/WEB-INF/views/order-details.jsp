@@ -36,7 +36,7 @@
 			               <div class="col-xs-6 col-sm-6 col-md-6">
 			                   <address>
 			                      <strong>Shipping Address</strong><br/>
-			                      ${order.cart.customer.shippingAddress.strretName}
+			                      ${order.cart.customer.shippingAddress.streetName}
 			                      <br/>
 			                      
 			                      ${order.cart.customer.shippingAddress.apartmentNumber}
@@ -65,7 +65,7 @@
 			               <div class="col-xs-6 col-sm-6 col-md-6">
 			                   <address>
 			                      <strong>Billing Address</strong><br/>
-			                      ${order.cart.customer.billingAddress.strretName}
+			                      ${order.cart.customer.billingAddress.streetName}
 			                      <br/>
 			                      
 			                      ${order.cart.customer.billingAddress.apartmentNumber}

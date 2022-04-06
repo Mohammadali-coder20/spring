@@ -1,7 +1,9 @@
 package org.MohammadAli.services;
 
 import org.MohammadAli.data.CustomerDAO;
+import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.Customer;
+import org.MohammadAli.models.CartDTO;
 import org.MohammadAli.models.CustomerDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +91,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerDTO.RETRIEVE getCustomerCartAndCustomerIdByUsername(String username) {
        Customer customer =  customerDAO.getCustomerByUserName(username);
-       return mapper.map(customer , CustomerDTO.RETRIEVE.class);
+        CustomerDTO.RETRIEVE map = mapper.map(customer, CustomerDTO.RETRIEVE.class);
+        for (Cart cart : customer.getCart()) {
+            if (cart.getGrandTotal() == 0){
+                map.setCart(mapper.map(cart , CartDTO.RETRIEVE.class));
+                break;
+            }
+        }
+        return map;
     }
 }

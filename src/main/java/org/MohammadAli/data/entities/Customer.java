@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Setter
@@ -45,10 +46,8 @@ public class Customer extends Audit implements Serializable {
 
     private boolean enabled;
 
-
-    @OneToOne
-    @JoinColumn(name="cartId")
-    private Cart cart;
+    @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+    private List<Cart> cart;
 
     @Valid
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

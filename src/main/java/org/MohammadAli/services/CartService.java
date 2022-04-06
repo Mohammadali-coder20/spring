@@ -23,4 +23,6 @@ public interface CartService {
     void clearCart(Long cartID);
 
     CartDTO.RETRIEVE findCartByIDAndMakeItReadyToCheckout(long cartID);
+
+    void createNewCartForCustomer(Long customerID);
 }

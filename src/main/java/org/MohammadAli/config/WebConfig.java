@@ -1,5 +1,7 @@
 package org.MohammadAli.config;
 
+import org.MohammadAli.data.entities.Cart;
+import org.MohammadAli.data.entities.Customer;
 import org.MohammadAli.data.entities.Product;
 import org.MohammadAli.models.CustomerDTO;
 import org.MohammadAli.models.Pagination;
@@ -108,6 +110,13 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public Pagination<ProductDTO.RETRIEVE> getPagePagination(){
         return new Pagination<>(ArrayList<ProductDTO.RETRIEVE>::new);
+    }
+
+    @Bean
+    public Cart initCart(){
+        Cart cart = new Cart();
+        cart.setCustomer(new Customer());
+        return cart;
     }
 
 

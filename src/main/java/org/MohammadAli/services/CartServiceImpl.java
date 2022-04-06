@@ -3,6 +3,7 @@ package org.MohammadAli.services;
 import org.MohammadAli.data.CartDAO;
 import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.CartItem;
+import org.MohammadAli.data.entities.Customer;
 import org.MohammadAli.models.CartDTO;
 import org.MohammadAli.models.CartItemDTO;
 import org.modelmapper.ModelMapper;
@@ -23,6 +24,9 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     ModelMapper mapper;
+
+//    @Autowired
+//    Cart cart;
 
     @Override
     @Transactional
@@ -77,10 +81,19 @@ public class CartServiceImpl implements CartService {
         return cartByID;
     }
 
+    @Override
+    public void createNewCartForCustomer(Long customerID) {
+        Cart cart = new Cart();
+        cart.setCustomer(new Customer());
+        cart.getCustomer().setCustomerID(customerID);
+        cart.setGrandTotal(0D);
+        cartDAO.save(cart);
+    }
+
     @Transactional
     public Cart validateCustomerCart(Long cartID) throws IOException {
         Cart cart = cartDAO.findById(cartID).orElseThrow(() -> new IOException("no such cart is existed"));
-        if (cart.getCartItems().size() == -0) throw new IOException("cart with'" + cartID + "'id have no items");
+        if (cart.getCartItems().size() == 0) throw new IOException("cart with'" + cartID + "'id have no items");
         return cart;
     }
 
