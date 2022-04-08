@@ -27,6 +27,8 @@ public class CartDTO {
 
     private Double grandTotal;
 
+    private boolean isCheckout;
+
     @Setter
     @Getter
     public static class CREATE extends CartDTO{
@@ -59,18 +61,6 @@ public class CartDTO {
     public static class INFO extends CartDTO{
         private Long cartId;
         private List<CartItemDTO.RETRIEVE> cartItems;
-
-    }
-
-    @Setter
-    @Getter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class TEST extends CartDTO{
-
-        private List<CartItemDTO.RETRIEVE> cartItems;
-
-        private Long cartId;
 
     }
 

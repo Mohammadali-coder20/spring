@@ -94,6 +94,7 @@ public class CustomerRegisterController {
         //persist cart
         cartDTO.setCustomer(customerDTO);
         cartDTO.setGrandTotal(0d);
+        cartDTO.setCheckout(false);
         cartService.save(cartDTO);
 
 

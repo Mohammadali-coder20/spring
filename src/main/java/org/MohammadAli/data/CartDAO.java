@@ -21,5 +21,9 @@ public interface CartDAO extends JpaRepository<Cart , Long> {
 
     @Modifying
     @Query(value = "update Cart c set c.grandTotal =:grandTotal where c.cartId =:cartID ")
-    void calculateCartGrandTotal(@Param("grandTotal") Double grandTotal ,@Param("cartID") Long CartID);
+    void updateCalculatedCartGrandTotal(@Param("grandTotal") Double grandTotal , @Param("cartID") Long CartID);
+
+    @Modifying
+    @Query("update Cart c set c.isCheckout = true where c.cartId =:cartID")
+    void checkoutCart(@Param("cartID") Long cartID);
 }

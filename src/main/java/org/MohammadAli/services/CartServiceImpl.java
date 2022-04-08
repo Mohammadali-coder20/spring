@@ -82,11 +82,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void createNewCartForCustomer(Long customerID) {
+    public void createNewCartForCustomerAndCheckoutCurrentCart(Long customerID , Long cartID) {
+        cartDAO.checkoutCart(cartID);
         Cart cart = new Cart();
         cart.setCustomer(new Customer());
         cart.getCustomer().setCustomerID(customerID);
         cart.setGrandTotal(0D);
+        cart.setCheckout(false);
         cartDAO.save(cart);
     }
 
@@ -104,7 +106,7 @@ public class CartServiceImpl implements CartService {
         for (CartItemDTO.RETRIEVE cartItem : cartItems) {
             grandTotal += cartItem.getTotalPrice();
         }
-        cartDAO.calculateCartGrandTotal(grandTotal, dto.getCartId());
+        cartDAO.updateCalculatedCartGrandTotal(grandTotal, dto.getCartId());
         return grandTotal;
     }
 

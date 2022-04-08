@@ -93,7 +93,7 @@ public class CustomerServiceImpl implements CustomerService {
        Customer customer =  customerDAO.getCustomerByUserName(username);
         CustomerDTO.RETRIEVE map = mapper.map(customer, CustomerDTO.RETRIEVE.class);
         for (Cart cart : customer.getCart()) {
-            if (cart.getGrandTotal() == 0){
+            if (!cart.isCheckout()){
                 map.setCart(mapper.map(cart , CartDTO.RETRIEVE.class));
                 break;
             }

@@ -1,13 +1,10 @@
 package org.MohammadAli.services;
 
 
-import org.MohammadAli.data.CartDAO;
 import org.MohammadAli.data.CustomerOrderDAO;
 import org.MohammadAli.data.entities.Cart;
 import org.MohammadAli.data.entities.Customer;
 import org.MohammadAli.data.entities.CustomerOrder;
-import org.MohammadAli.models.CartDTO;
-import org.MohammadAli.models.CustomerDTO;
 import org.MohammadAli.models.CustomerOrderDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,9 +66,8 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
         order.setBillingAddress(customer.getBillingAddress());
         order.setShippingAddress(customer.getShippingAddress());
         customerOrderDAO.save(order);
-
 //        cartService.clearCart(cart.getCartId());
-        cartService.createNewCartForCustomer(customer.getCustomerID());
+        cartService.createNewCartForCustomerAndCheckoutCurrentCart(customer.getCustomerID() , cart.getCartId());
 //        CartDTO.CREATE newCustomerCart = new CartDTO.CREATE();
 //        newCustomerCart.setCustomer(new CustomerDTO.CREATE());
 //        newCustomerCart.getCustomer().setCustomerID(customer.getCustomerID());

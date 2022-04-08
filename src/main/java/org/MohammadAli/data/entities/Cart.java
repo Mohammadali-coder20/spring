@@ -35,4 +35,6 @@ public class Cart extends Audit implements Serializable {
 
     private Double grandTotal;
 
+    private boolean isCheckout;
+
 }
