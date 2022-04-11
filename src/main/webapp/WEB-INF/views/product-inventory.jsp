@@ -13,7 +13,7 @@
             <h1>Product Inventory Page:${pageContext.request.userPrincipal.name}</h1>
 
             <p class="lead">This is product inventory page</p>
-            <a class="btn btn-primary" href="<spring:url value="/admin/product/add-product"/>">Add New Product</a>
+            <a class="btn btn-primary" href="<spring:url value="/admin/product/add-product/${totalPages}"/>">Add New Product</a>
 
             <c:if test="${not empty search}">
                 <a class="btn btn-primary" href="<spring:url value="/admin/product-management/1"/>">See All Product</a>
@@ -34,11 +34,11 @@
                                    id="inputEmail" placeholder="Enter Brand , model or  category name">
                         </div>
                         <div style="position: relative; left: 530px; top: 6px; float: left;">
-<%--                            <select name="category">--%>
-<%--                                <option>Laptop</option>--%>
-<%--                                <option>Mobile</option>--%>
-<%--                                <option>TV</option>--%>
-<%--                            </select>--%>
+                            <select name="category">
+                                <option>Laptop</option>
+                                <option>Mobile</option>
+                                <option>TV</option>
+                            </select>
                         </div>
                         <%--                        <form:form>--%>
                         <%--                            <form:select path="product" >--%>

@@ -99,4 +99,23 @@ public class ProductServiceImpl implements ProductService {
             product.setImg(productDAO.retrieveProductImgByID(productID));
         productDAO.save(product);
     }
+
+
+    @Override
+    public int findPageElementsCount(int pageNumber) {
+        Pageable pageable = Pagination.createPage(pageNumber , Pagination.PAGE_ELEMENT_SIZE );
+        Page<Product> products = productDAO.findAll(pageable);
+        return products.getNumberOfElements();
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

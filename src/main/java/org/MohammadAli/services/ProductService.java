@@ -23,4 +23,6 @@ public interface ProductService {
     List<ProductDTO.RETRIEVE> findProductByBrandOrModelOrNameAndCategory(String searchTerm, String category , int pageNumber , Pagination<ProductDTO.RETRIEVE> pagination);
 
     void update(ProductDTO.CREATE createDTO , Long productID) throws IOException;
+
+    int findPageElementsCount(int pageNumber);
 }

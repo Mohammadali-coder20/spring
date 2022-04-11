@@ -62,10 +62,10 @@
 	        
 		         <div class="searchBox">
 		         
-		            <form class="form-inline" action="<c:url value="/product/product-list/${productCategory}/1" />" method="post">
+		            <form class="form-inline" action="<c:url value="/product/product-list/${productCategory}/1" />" method="get">
 		             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					    <div class="form-group">
-					        <label  for="inputEmail">Search more ${productCategory} :</label>
+					        <label  for="inputEmail">Search more <c:if test="${productCategory ne 'all'}">${productCategory}</c:if> :</label>
 					        <input type="text" name="searchTerm" class="form-control" id="inputEmail" placeholder="Enter Brand , model name ">
 					    </div>
 					    <input type="hidden"  value="search" name="search">

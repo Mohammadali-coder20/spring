@@ -26,8 +26,9 @@
 
         <div class="form-layout">
             <form:form
-                    action="${pageContext.request.contextPath}/admin/product/save-product/${previousPage}?${_csrf.parameterName}=${_csrf.token}"
+                    action="${pageContext.request.contextPath}/admin/product/save-product/?${_csrf.parameterName}=${_csrf.token}"
                     method="post" modelAttribute="product" enctype="multipart/form-data" class="form-horizontal">
+                <input type="hidden" name="pageNumber"  value="${previousPage}">
                 <div class="row">
                     <label class="col-xs-3 control-label"></label>
                     <div class="col-xs-9">
