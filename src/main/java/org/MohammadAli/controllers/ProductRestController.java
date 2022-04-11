@@ -1,20 +1,14 @@
 package org.MohammadAli.controllers;
 
 import lombok.AllArgsConstructor;
-import org.MohammadAli.models.ProductDTO;
 import org.MohammadAli.services.ProductService;
-import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/product/rest")
 @AllArgsConstructor
-public class ProductRestService {
+public class ProductRestController {
 
 
 //    final static Logger logger= Logger.getLogger(ProductController.class);

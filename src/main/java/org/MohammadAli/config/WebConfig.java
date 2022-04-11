@@ -28,15 +28,25 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import springfox.documentation.RequestHandler;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.servlet.jsp.tagext.ValidationMessage;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
 @ComponentScan(basePackages = {"org.MohammadAli.controllers","org.MohammadAli.services","org.MohammadAli.data"})
 @EnableWebMvc
+@EnableSwagger2
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean
@@ -51,6 +61,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
     }
 
     @Bean
@@ -100,6 +113,30 @@ public class WebConfig implements WebMvcConfigurer {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setMaxUploadSize(5*1024*1024);
         return resolver;
+    }
+
+    @Bean
+    public Docket api(){
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+//                .apis(RequestHandlerSelectors.basePackage("com.mohammadali.controllers.rest"))
+                .paths(PathSelectors.ant("/rest/**"))
+                .build()
+                .apiInfo(apiInfo());
+    }
+
+    private ApiInfo apiInfo(){
+        return  new ApiInfo(
+                "Online Shop Rest Api",
+                "crud operation on customer cart",
+                "api 1.0",
+                "Term of Service",
+                new Contact("MohammadAli Khomarbaghi","https://contact.ac.ir/mohammadali","example@dummy.com"),
+                "License Api",
+                "Licence Api url",
+                Collections.emptyList()
+                );
     }
 
     @Bean
